@@ -5,13 +5,13 @@ WORKDIR /app
 ARG FORMSPREE_FORM_ID
 ENV FORMSPREE_FORM_ID=$FORMSPREE_FORM_ID
 COPY package.json package-lock.json ./
-COPY apps/web/package.json apps/web/
-COPY apps/web/vite.config.js apps/web/
-COPY apps/web/.env.loca[l] apps/web/
-COPY apps/web/ apps/web/
+COPY apps/package.json apps/
+COPY apps/vite.config.js apps/
+COPY apps/.env.local apps/
+COPY apps/ apps/
 
 RUN npm install
-RUN npm run build --workspace=apps/web
+RUN npm run build --workspace=apps
 
 # Production stage
 FROM nginx:alpine
