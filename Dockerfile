@@ -4,9 +4,8 @@ WORKDIR /app
 
 COPY package.json package-lock.json ./
 COPY apps/web/package.json apps/web/
-COPY apps/web/tsconfig.json apps/web/ 2>/dev/null || true
-COPY apps/web/vite.config.js apps/web/ 2>/dev/null || true
-COPY apps/web/.env.local apps/web/ 2>/dev/null || true
+COPY apps/web/vite.config.js apps/web/
+COPY apps/web/.env.local apps/web/
 COPY apps/web/ apps/web/
 
 RUN npm install
