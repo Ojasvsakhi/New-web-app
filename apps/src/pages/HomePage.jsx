@@ -6,6 +6,7 @@ import { ArrowRight, FileText, Shield, Calculator, TrendingUp, CheckCircle2, Awa
 import { Button } from '@/components/ui/button';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
+import QuickContactSheet from '../components/QuickContactSheet';
 import ServiceCard from '@/components/ServiceCard.jsx';
 import TestimonialCard from '@/components/TestimonialCard.jsx';
 function HomePage() {
@@ -62,7 +63,6 @@ function HomePage() {
       </Helmet>
 
       <div className="min-h-screen flex flex-col">
-        <Header />
 
         <main className="flex-1">
           <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
@@ -89,12 +89,12 @@ function HomePage() {
                     Personalized accounting solutions tailored to your business needs. From tax planning to financial consulting, get expert guidance you can trust.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Link to="/contact">
+                    <QuickContactSheet>
                       <Button size="lg" className="text-base transition-all duration-200 active:scale-[0.98] group">
                         Schedule consultation
                         <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                       </Button>
-                    </Link>
+                    </QuickContactSheet>
                     <Link to="/services">
                       <Button size="lg" variant="outline" className="text-base bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 transition-all duration-200 active:scale-[0.98]">
                         View services
@@ -106,7 +106,7 @@ function HomePage() {
             </div>
           </section>
 
-          <section className="py-24 bg-background">
+          <section id="core-services" className="py-24 bg-background">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
                 <h2 className="mb-4">Core services</h2>
@@ -130,7 +130,7 @@ function HomePage() {
             </div>
           </section>
 
-          <section className="py-24 bg-muted">
+          <section id="why-choose-us" className="py-24 bg-muted">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
                 <h2 className="mb-4">Why clients choose us</h2>
@@ -159,7 +159,7 @@ function HomePage() {
             </div>
           </section>
 
-          <section className="py-24 bg-background">
+          <section id="testimonials" className="py-24 bg-background">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
                 <h2 className="mb-4">Client testimonials</h2>
@@ -180,17 +180,16 @@ function HomePage() {
               <p className="text-xl text-primary-foreground/90 mb-8 leading-relaxed">
                 Schedule a consultation today and discover how personalized CA services can benefit your business
               </p>
-              <Link to="/contact">
+              <QuickContactSheet>
                 <Button size="lg" variant="secondary" className="text-base transition-all duration-200 active:scale-[0.98]">
                   Contact us today
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-              </Link>
+              </QuickContactSheet>
             </div>
           </section>
         </main>
 
-        <Footer />
       </div>
     </>;
 }

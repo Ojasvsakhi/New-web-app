@@ -2,8 +2,8 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
-ARG FORMSPREE_FORM_ID
-ENV FORMSPREE_FORM_ID=$FORMSPREE_FORM_ID
+ARG VITE_FORMSPREE_FORM_ID
+ENV VITE_FORMSPREE_FORM_ID=$VITE_FORMSPREE_FORM_ID
 COPY package.json package-lock.json ./
 COPY apps/package.json apps/
 COPY apps/vite.config.js apps/

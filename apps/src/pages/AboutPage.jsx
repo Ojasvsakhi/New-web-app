@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Award, Target, Users, Zap } from 'lucide-react';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
-
+import profileImage from '@/assets/photo.jpg';
 function AboutPage() {
   const advantages = [
     {
@@ -48,15 +48,13 @@ function AboutPage() {
       </Helmet>
 
       <div className="min-h-screen flex flex-col">
-        <Header />
-
         <main className="flex-1">
           <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.5 }}
                 className="text-center max-w-3xl mx-auto"
               >
                 <h1 className="mb-6">About Rupesh Sakhi & Co</h1>
@@ -67,36 +65,44 @@ function AboutPage() {
             </div>
           </section>
 
-          <section className="py-20 bg-background">
+          <section id="background" className="py-24 bg-background">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              
+              <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16 max-w-4xl mx-auto">
+                
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5 }}
+                  className="flex-shrink-0" 
                 >
                   <img 
-                    src="https://images.unsplash.com/photo-1697638164340-6c5fc558bdf2" 
-                    alt="Professional chartered accountant office with modern workspace and financial documents"
-                    className="rounded-2xl shadow-xl w-full h-auto"
+                    src={profileImage} 
+                    alt="Rupesh Sakhi - Professional Chartered Accountant"
+                    className="rounded-2xl shadow-xl w-[219px] h-[295px] object-cover border border-border/50"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </motion.div>
 
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="flex-1 text-center md:text-left"
                 >
-                  <h2 className="mb-6">Professional background</h2>
+                  <h2 className="mb-6 text-4xl md:text-5xl font-bold text-foreground">
+                      Professional background
+                  </h2>
+                  
                   <div className="space-y-4 text-muted-foreground leading-relaxed">
                     <p>
-                      With 13 years of professional experience as a chartered accountant, Rupesh Sakhi has built a reputation for delivering high-quality, personalized accounting services to businesses across various industries.
+                      With over 13 years of professional experience, Rupesh Sakhi delivers meticulous tax, audit, and advisory services. By partnering closely with clients—from startups to established enterprises—he ensures absolute confidence in navigating complex financial landscapes.
                     </p>
                     <p>
-                      As a solo practitioner, Rupesh Sakhi & Co offers a unique advantage: every client receives direct attention from an experienced CA who understands their business inside and out. This personalized approach ensures that your financial matters are handled with the expertise and care they deserve.
-                    </p>
-                    <p>
-                      The practice specializes in providing comprehensive CA services including tax planning, audit, GST compliance, and financial consulting. Whether you're a startup, small business, or established enterprise, you'll receive tailored solutions designed to meet your specific needs.
+                      As a solo practitioner, the firm offers a distinct advantage: direct access to senior-level expertise. Every client receives personalized, strategic attention tailored specifically to their long-term business goals.
                     </p>
                   </div>
                 </motion.div>
@@ -104,7 +110,7 @@ function AboutPage() {
             </div>
           </section>
 
-          <section className="py-20 bg-muted">
+          <section id="solo-practice" className="py-20 bg-muted">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
                 <h2 className="mb-4">Why choose a solo practice?</h2>
@@ -118,8 +124,9 @@ function AboutPage() {
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
                     className="bg-card rounded-2xl p-8 shadow-lg border border-border"
                   >
                     <div className="flex items-start space-x-4">
@@ -139,7 +146,7 @@ function AboutPage() {
             </div>
           </section>
 
-          <section className="py-20 bg-background">
+          <section id="expertise" className="py-20 bg-background">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
                 <h2 className="mb-4">Areas of expertise</h2>
@@ -153,8 +160,9 @@ function AboutPage() {
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: (index % 3) * 0.1 }}
                     className="bg-muted rounded-xl p-6 text-center"
                   >
                     <p className="font-medium">{item}</p>
@@ -174,7 +182,6 @@ function AboutPage() {
           </section>
         </main>
 
-        <Footer />
       </div>
     </>
   );

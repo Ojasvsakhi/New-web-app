@@ -13,5 +13,8 @@
 	},
 	"workspaces": [
 		"apps"
-	]
+	],
+	"dependencies": {
+		"framer-motion": "^12.38.0"
+	}
 }

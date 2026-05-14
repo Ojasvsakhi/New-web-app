@@ -25,7 +25,7 @@ jobs:
           context: .
           push: true
           build-args: |
-            FORMSPREE_FORM_ID=${{ secrets.FORMSPREE_FORM_ID }}
+            VITE_FORMSPREE_FORM_ID=${{ secrets.VITE_FORMSPREE_FORM_ID }}
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/new-web-app:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/new-web-app:${{ github.sha }}

@@ -8,42 +8,49 @@ import Footer from '@/components/Footer.jsx';
 function ServicesPage() {
   const services = [
     {
+      id: 'tax-planning',
       icon: Calculator,
       title: 'Tax planning & compliance',
       description: 'Strategic tax planning services to minimize your tax liabilities while ensuring full compliance with income tax regulations. We provide comprehensive tax return preparation, advance tax calculations, and year-round tax advisory to help you make informed financial decisions.',
       benefits: 'Reduce tax burden, avoid penalties, optimize deductions, and maintain compliance with changing tax laws.'
     },
     {
+      id: 'audit-services',
       icon: Shield,
       title: 'Audit services',
       description: 'Professional audit and assurance services including statutory audits, internal audits, and tax audits. Our thorough examination of financial records ensures accuracy, identifies areas for improvement, and provides stakeholders with confidence in your financial reporting.',
       benefits: 'Enhanced credibility, improved internal controls, risk mitigation, and regulatory compliance.'
     },
     {
+      id: 'gst-indirect',
       icon: FileText,
       title: 'GST & indirect tax compliance',
       description: 'Complete GST services from registration to filing and compliance. We handle GST return preparation, input tax credit reconciliation, GST audits, and advisory on complex GST matters to keep your business compliant and efficient.',
       benefits: 'Timely compliance, maximized input tax credits, reduced audit risks, and expert guidance on GST regulations.'
     },
     {
+      id: 'financial-consulting',
       icon: TrendingUp,
       title: 'Financial consulting',
       description: 'Strategic financial advisory services to help your business grow. We provide financial planning, budgeting, cash flow management, investment advisory, and business valuation services tailored to your specific needs and goals.',
       benefits: 'Better financial decisions, improved profitability, sustainable growth, and long-term financial stability.'
     },
     {
+      id: 'bookkeeping-accounting',
       icon: BookOpen,
       title: 'Bookkeeping & accounting',
       description: 'Comprehensive bookkeeping and accounting services to maintain accurate financial records. We handle day-to-day transaction recording, bank reconciliation, accounts payable/receivable management, and monthly financial reporting.',
       benefits: 'Accurate records, time savings, better cash flow visibility, and informed business decisions.'
     },
     {
+      id: 'business-advisory',
       icon: Briefcase,
       title: 'Business advisory',
       description: 'Expert business advisory services covering business structure optimization, compliance management, financial restructuring, and strategic planning. We help you navigate complex business decisions with confidence.',
       benefits: 'Strategic clarity, risk management, operational efficiency, and sustainable business growth.'
     },
     {
+      id: 'financial-statement',
       icon: FileCheck,
       title: 'Financial statement preparation',
       description: 'Professional preparation of financial statements including balance sheets, profit & loss statements, and cash flow statements. We ensure your financial statements are accurate, compliant, and provide meaningful insights into your business performance.',
@@ -59,7 +66,6 @@ function ServicesPage() {
       </Helmet>
 
       <div className="min-h-screen flex flex-col">
-        <Header />
 
         <main className="flex-1">
           <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
@@ -84,6 +90,7 @@ function ServicesPage() {
                 {services.map((service, index) => (
                   <motion.div
                     key={index}
+                    id={service.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -129,7 +136,6 @@ function ServicesPage() {
           </section>
         </main>
 
-        <Footer />
       </div>
     </>
   );
