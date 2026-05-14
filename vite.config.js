@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./apps/src"),
+      '@': fileURLToPath(new URL('./apps/src', import.meta.url)),
     },
   },
   server: {
