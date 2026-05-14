@@ -31,15 +31,16 @@ export const linksCategories = [
         name: "Direct Tax",
         links: [
           { name: "Central Board of Direct Taxes", url: "https://incometaxindia.gov.in" },
+          { name: "Income Tax Appellate Tribunal", url: "https://itat.gov.in"},
           { name: "Tax Information Network", url: "https://www.tin-nsdl.com" },
-          { name: "UTI PAN Services", url: "https://www.utitsl.com" }
         ]
       },
       {
         name: "Indirect Tax",
         links: [
           { name: "Central Board of Excise & Customs", url: "https://www.cbic.gov.in" },
-          { name: "Goods and Services Tax (GST)", url: "https://www.gst.gov.in" }
+          { name: "Goods and Services Tax (GST)", url: "https://www.gst.gov.in" },
+          {name: "GST Appellate Tribunal-GSTAT", url: "https://efiling.gstat.gov.in"}
         ]
       }
     ]
