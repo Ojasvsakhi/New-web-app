@@ -58,7 +58,7 @@ function HomePage() {
   }];
   return <>
       <Helmet>
-        <title>Rupesh Sakhi & Co - Professional CA services with 13 years of experience</title>
+        <title>Rupesh Sakhi & Co</title>
         <meta name="description" content="Expert chartered accountant services including tax planning, audit, GST compliance, and financial consulting. Personalized solutions for your business growth." />
       </Helmet>
 
