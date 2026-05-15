@@ -15,7 +15,11 @@ function Header() {
   const navRef = useRef(null);
   
   const [boxStyle, setBoxStyle] = useState({ left: 0, width: 0, top: 0, height: 0, opacity: 0 });
-
+    const handleLinkClick = (path) => {
+      if (location.pathname === path) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
   const navLinks = [
     { 
       name: 'Home', 
@@ -116,7 +120,7 @@ function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" onClick={() => handleLinkClick('/')} className="flex items-center space-x-2">
             <div className="flex flex-col">
               <span className="text-2xl font-bold text-primary" style={{ fontFamily: "'ClearAmpersand','Playfair Display, serif'" }}>
                 Rupesh Sakhi & Co
@@ -139,6 +143,7 @@ function Header() {
                 return (
                   <div
                     key={link.path}
+                    onClick={() => handleLinkClick(link.path)}
                     data-active={isActive}
                     className="relative inline-block"
                     onMouseEnter={() => setHoveredNav(link.name)}

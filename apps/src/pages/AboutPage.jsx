@@ -146,7 +146,7 @@ function AboutPage() {
             </div>
           </section>
 
-          <section id="expertise" className="py-20 bg-background">
+          <section id="expertise" className="py-20 transition-colors duration-1000 ease-out target:bg-secondary/20 target:border-secondary/50 rounded-2xl border border-transparent">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
                 <h2 className="mb-4">Areas of expertise</h2>
@@ -172,13 +172,30 @@ function AboutPage() {
             </div>
           </section>
 
-          <section className="py-20 bg-primary text-primary-foreground">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h2 className="text-white mb-6">Commitment to excellence</h2>
-              <p className="text-xl text-primary-foreground/90 leading-relaxed">
-                Every client relationship is built on trust, transparency, and a commitment to delivering exceptional service. Your financial success is the measure of our success.
-              </p>
-            </div>
+          <section className="py-12 px-4 sm:px-6 lg:px-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="max-w-4xl mx-auto relative overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] shadow-xl"
+            >
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-slate-400/40 dark:via-slate-500/30 to-transparent" />
+              
+              <div className="relative z-10 px-6 py-12 md:py-14 text-center">
+                <div className="mx-auto w-14 h-14 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center mb-6 rotate-3 hover:rotate-0 transition-transform duration-300">
+                  <Award className="w-7 h-7" />
+                </div>
+                
+                <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4 text-foreground">
+                  Commitment to excellence
+                </h2>
+                
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                  Every client relationship is built on trust, transparency, and a commitment to delivering exceptional service. Your financial success is the measure of our success.
+                </p>
+              </div>
+            </motion.div>
           </section>
         </main>
 

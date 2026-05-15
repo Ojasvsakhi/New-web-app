@@ -89,35 +89,50 @@ function ServicesPage() {
               <div className="space-y-16">
                 {services.map((service, index) => (
                   <motion.div
-                    key={index}
+                    key={service.id}
                     id={service.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className={`grid grid-cols-1 md:grid-cols-2 gap-12 items-center ${
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    className={`flex flex-col md:flex-row items-center gap-10 lg:gap-16 ${
                       index % 2 === 1 ? 'md:flex-row-reverse' : ''
                     }`}
                   >
-                    <div className={index % 2 === 1 ? 'md:order-2' : ''}>
-                      <div className="flex items-center space-x-4 mb-6">
-                        <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                          <service.icon className="h-8 w-8 text-primary" />
-                        </div>
-                        <h2 className="text-3xl">{service.title}</h2>
+                    <div className="flex-1 space-y-6">
+                      <div className="space-y-3">
+                        
+                        <h2 className="text-3xl md:text-4xl font-bold transition-colors duration-1000">
+                          {service.title}
+                        </h2>
                       </div>
-                      <p className="text-muted-foreground leading-relaxed mb-6">
+
+                      <p className="text-lg text-muted-foreground leading-relaxed">
                         {service.description}
                       </p>
-                      <div className="bg-muted rounded-xl p-6">
-                        <p className="text-sm font-medium mb-2">Key benefits:</p>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          {service.benefits}
-                        </p>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 transition-hover duration-300 hover:border-secondary/30">
+                          <p className="text-xs font-bold text-secondary uppercase mb-1">Impact</p>
+                          <p className="text-sm text-foreground/80 leading-snug">{service.benefits}</p>
+                        </div>
+                        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800">
+                          <p className="text-xs font-bold text-secondary uppercase mb-1">Expertise</p>
+                          <p className="text-sm text-foreground/80 leading-snug">Direct handling by CA with 13+ years experience.</p>
+                        </div>
                       </div>
                     </div>
-                    <div className={index % 2 === 1 ? 'md:order-1' : ''}>
-                      <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl h-80 flex items-center justify-center">
-                        <service.icon className="h-32 w-32 text-primary/20" />
+                    <div className="flex-1 w-full max-w-md">
+                      <div className="relative group">
+                        <div className="absolute -inset-4 bg-gradient-to-tr from-secondary/20 to-primary/20 rounded-[2.5rem] blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-500" />
+                        
+                        <div className="relative h-80 w-full rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl flex items-center justify-center overflow-hidden shadow-2xl">
+                          <service.icon className="absolute -bottom-8 -right-8 h-64 w-64 text-slate-200/30 dark:text-slate-800/20 rotate-12 transition-transform duration-700 group-hover:rotate-0 group-hover:scale-110" />
+                          
+                          <div className="relative p-8 rounded-3xl bg-white dark:bg-slate-800 shadow-xl border border-slate-100 dark:border-slate-700 transform transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
+                            <service.icon className="h-20 w-20 text-primary" />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </motion.div>

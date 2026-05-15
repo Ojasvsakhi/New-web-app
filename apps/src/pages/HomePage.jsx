@@ -174,18 +174,33 @@ function HomePage() {
             </div>
           </section>
 
-          <section className="py-24 bg-primary text-primary-foreground">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h2 className="text-white mb-6">Ready to get started?</h2>
-              <p className="text-xl text-primary-foreground/90 mb-8 leading-relaxed">
-                Schedule a consultation today and discover how personalized CA services can benefit your business
-              </p>
-              <QuickContactSheet>
-                <Button size="lg" variant="secondary" className="text-base transition-all duration-200 active:scale-[0.98]">
-                  Contact us today
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </QuickContactSheet>
+          <section className="py-8 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto relative overflow-hidden rounded-3xl border border-slate-800 bg-primary shadow-2xl">
+            
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-400/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-b from-slate-800/20 to-transparent pointer-events-none" />
+
+              <div className="relative z-10 px-6 py-10 md:py-12 text-center">
+                <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-3 tracking-tight">
+                  Ready to get started?
+                </h2>
+                
+                <p className="text-base md:text-lg text-slate-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+                  Schedule a consultation today and discover how personalized CA services can benefit your business.
+                </p>
+                
+                <QuickContactSheet>
+                  <Button 
+                    size="lg" 
+                    variant="secondary" 
+                    className="rounded-full px-8 text-base font-medium transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-[0_0_20px_-5px_rgba(255,255,255,0.2)]"
+                  >
+                    Contact us today
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </QuickContactSheet>
+              </div>
+              
             </div>
           </section>
         </main>
