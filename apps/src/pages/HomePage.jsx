@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -9,9 +9,13 @@ import Footer from '@/components/Footer.jsx';
 import QuickContactSheet from '../components/QuickContactSheet';
 import ServiceCard from '@/components/ServiceCard.jsx';
 import TestimonialCard from '@/components/TestimonialCard.jsx';
+
 function HomePage() {
   const heroRef = useRef(null);
   const overlayRef = useRef(null);
+  
+  const mousePosRef = useRef({ x: 0, y: 0 });
+  const isHoveringRef = useRef(false);
 
   const services = [{
     icon: Calculator,
@@ -62,24 +66,43 @@ function HomePage() {
     text: 'Proven track record of client success'
   }];
 
-  const handleMouseMove = (e) => {
-    if (!heroRef.current || !overlayRef.current) return;
+  const updateSpotlight = () => {
+    if (!heroRef.current || !overlayRef.current || !isHoveringRef.current) return;
     
     const rect = heroRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const x = mousePosRef.current.x - rect.left;
+    const y = mousePosRef.current.y - rect.top;
 
-    const mask = `radial-gradient(circle 200px at ${x}px ${y}px, transparent 0%, black 100%)`;
+    const mask = `radial-gradient(circle 150px at ${x}px ${y}px, transparent 0%, black 100%)`;
     overlayRef.current.style.maskImage = mask;
     overlayRef.current.style.webkitMaskImage = mask;
   };
 
+  const handleMouseMove = (e) => {
+    mousePosRef.current = { x: e.clientX, y: e.clientY };
+    isHoveringRef.current = true;
+    updateSpotlight();
+  };
+
   const handleMouseLeave = () => {
+    isHoveringRef.current = false;
     if (!overlayRef.current) return;
     const mask = `radial-gradient(circle 0px at 0px 0px, transparent 0%, black 100%)`;
     overlayRef.current.style.maskImage = mask;
     overlayRef.current.style.webkitMaskImage = mask;
   };
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isHoveringRef.current) {
+        requestAnimationFrame(updateSpotlight);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
