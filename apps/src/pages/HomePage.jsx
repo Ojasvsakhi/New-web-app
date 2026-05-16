@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -10,6 +10,9 @@ import QuickContactSheet from '../components/QuickContactSheet';
 import ServiceCard from '@/components/ServiceCard.jsx';
 import TestimonialCard from '@/components/TestimonialCard.jsx';
 function HomePage() {
+  const heroRef = useRef(null);
+  const overlayRef = useRef(null);
+
   const services = [{
     icon: Calculator,
     title: 'Tax planning & compliance',
@@ -27,6 +30,7 @@ function HomePage() {
     title: 'Financial consulting',
     description: 'Strategic financial advice to help your business grow and achieve long-term financial goals.'
   }];
+
   const testimonials = [{
     name: 'Priya Sharma',
     role: 'Business owner, retail sector',
@@ -43,6 +47,7 @@ function HomePage() {
     content: 'As a startup, we needed cost-effective yet professional CA services. Rupesh delivered exactly that with exceptional attention to detail.',
     rating: 5
   }];
+
   const trustFactors = [{
     icon: Award,
     text: '13 years of professional experience'
@@ -56,32 +61,68 @@ function HomePage() {
     icon: TrendingUp,
     text: 'Proven track record of client success'
   }];
-  return <>
+
+  const handleMouseMove = (e) => {
+    if (!heroRef.current || !overlayRef.current) return;
+    
+    const rect = heroRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const mask = `radial-gradient(circle 200px at ${x}px ${y}px, transparent 0%, black 100%)`;
+    overlayRef.current.style.maskImage = mask;
+    overlayRef.current.style.webkitMaskImage = mask;
+  };
+
+  const handleMouseLeave = () => {
+    if (!overlayRef.current) return;
+    const mask = `radial-gradient(circle 0px at 0px 0px, transparent 0%, black 100%)`;
+    overlayRef.current.style.maskImage = mask;
+    overlayRef.current.style.webkitMaskImage = mask;
+  };
+
+  return (
+    <>
       <Helmet>
         <title>Rupesh Sakhi & Co</title>
         <meta name="description" content="Expert chartered accountant services including tax planning, audit, GST compliance, and financial consulting. Personalized solutions for your business growth." />
       </Helmet>
 
       <div className="min-h-screen flex flex-col">
-
         <main className="flex-1">
-          <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
+          
+          <section 
+            ref={heroRef}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden"
+          >
             <div className="absolute inset-0 z-0">
-              <img src="https://images.unsplash.com/photo-1584346881556-19b8804d414f" alt="Professional office environment with modern workspace" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/85 to-slate-900/70"></div>
+              <img 
+                src="https://images.unsplash.com/photo-1584346881556-19b8804d414f" 
+                alt="Professional office environment with modern workspace" 
+                className="w-full h-full object-cover" 
+              />
+              
+              <div className="absolute inset-0 bg-slate-900/40"></div>
+
+              <div 
+                ref={overlayRef}
+                className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/85 to-slate-900/70 transition-[mask-image] duration-200 ease-out"
+                style={{
+                  maskImage: 'radial-gradient(circle 0px at 0px 0px, transparent 0%, black 100%)',
+                  WebkitMaskImage: 'radial-gradient(circle 0px at 0px 0px, transparent 0%, black 100%)'
+                }}
+              ></div>
             </div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-              <div className="max-w-3xl">
-                <motion.div initial={{
-                opacity: 0,
-                y: 20
-              }} animate={{
-                opacity: 1,
-                y: 0
-              }} transition={{
-                duration: 0.6
-              }}>
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 pointer-events-none">
+              <div className="max-w-3xl pointer-events-auto">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }} 
+                  animate={{ opacity: 1, y: 0 }} 
+                  transition={{ duration: 0.6 }}
+                >
                   <h1 className="text-white mb-6">
                     Professional CA services
                   </h1>
@@ -204,8 +245,8 @@ function HomePage() {
             </div>
           </section>
         </main>
-
       </div>
-    </>;
+    </>
+  );
 }
 export default HomePage;

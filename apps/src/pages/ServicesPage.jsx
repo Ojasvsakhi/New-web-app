@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Calculator, Shield, FileText, TrendingUp, BookOpen, Briefcase, FileCheck } from 'lucide-react';
@@ -6,6 +7,22 @@ import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
 
 function ServicesPage() {
+  const location = useLocation();
+  const [highlightedSection, setHighlightedSection] = useState(null);
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      setHighlightedSection(id);
+      
+      const timer = setTimeout(() => {
+        setHighlightedSection(null);
+      }, 700);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [location.hash,location.key]);
+
   const services = [
     {
       id: 'tax-planning',
@@ -84,7 +101,7 @@ function ServicesPage() {
             </div>
           </section>
 
-          <section className="py-20 bg-background">
+          <section className="py-20 bg-background overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="space-y-16">
                 {services.map((service, index) => (
@@ -95,13 +112,16 @@ function ServicesPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className={`flex flex-col md:flex-row items-center gap-10 lg:gap-16 ${
+                    className={`flex flex-col md:flex-row items-center gap-10 lg:gap-16 p-6 rounded-[2rem] transition-all duration-700 ease-in-out ${
                       index % 2 === 1 ? 'md:flex-row-reverse' : ''
+                    } ${
+                      highlightedSection === service.id 
+                        ? 'bg-primary/10 shadow-2xl scale-[1.02] ring-1 ring-primary/30 z-10 relative' 
+                        : 'bg-transparent scale-100 z-0'
                     }`}
                   >
                     <div className="flex-1 space-y-6">
                       <div className="space-y-3">
-                        
                         <h2 className="text-3xl md:text-4xl font-bold transition-colors duration-1000">
                           {service.title}
                         </h2>

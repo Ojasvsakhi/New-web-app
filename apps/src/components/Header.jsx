@@ -104,19 +104,17 @@ function Header() {
 
   const handleDropdownClick = (e, path, hash) => {
     e.preventDefault();
+    e.stopPropagation();
     setMobileMenuOpen(false);
     setHoveredNav(null);
-
+    navigate(`${path}#${hash}`);
     if (location.pathname === path) {
       scrollToHeading(hash);
-      window.history.pushState({}, '', `${path}#${hash}`); 
-    } else {
-      navigate(`${path}#${hash}`);
     }
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 w-full z-50 bg-card/95 backdrop-blur-sm border-b border-border">
+    <header className="fixed top-0 left-0 right-0 w-full z-50 bg-card/80 backdrop-blur-sm border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
@@ -151,22 +149,24 @@ function Header() {
                   >
                     <Link
                       to={link.path}
-                      className={`relative z-10 px-4 py-2 text-sm font-medium transition-colors duration-200 flex items-center ${
-                        isActive ? 'text-white' : 'text-foreground hover:text-primary'
+                      className={`relative z-10 px-4 py-2 text-sm font-medium transition-all duration-200 flex items-center rounded-lg ${
+                        isActive 
+                          ? 'text-white' 
+                          : 'text-foreground hover:text-primary hover:bg-primary/10'
                       }`}
                     >
                       {link.name}
-                      {link.dropdown && <ChevronDown className="ml-1 h-3 w-3 opacity-70" />}
+                      {link.dropdown && <ChevronDown className={`ml-1 h-3 w-3 transition-transform duration-200 ${hoveredNav === link.name ? 'rotate-180' : 'opacity-70'}`} />}
                     </Link>
 
                     <AnimatePresence>
                       {link.dropdown && hoveredNav === link.name && (
                         <motion.div
-                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          initial={{ opacity: 0, y: 6, scale: 0.98 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                          transition={{ duration: 0.2 }}
-                          className="absolute left-0 mt-2 w-56 bg-card border border-border rounded-xl shadow-lg overflow-hidden z-50 py-2"
+                          exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                          transition={{ duration: 0.15, ease: "easeOut" }}
+                          className="absolute left-0 top-full mt-1 w-56 bg-card border border-border rounded-xl shadow-lg overflow-hidden z-50 py-2"
                         >
                           {link.dropdown.map((item) => (
                             <a
@@ -213,7 +213,7 @@ function Header() {
                 {navLinks.map((link) => (
                   <div key={link.path} className="flex flex-col">
                     <div className={`flex items-center justify-between px-4 py-2 rounded-lg transition-colors ${
-                      location.pathname === link.path ? 'bg-primary/10 text-primary' : 'text-foreground'
+                      location.pathname === link.path ? 'bg-primary/10 text-primary' : 'text-foreground hover:bg-muted/50'
                     }`}>
                       <Link 
                         to={link.path} 

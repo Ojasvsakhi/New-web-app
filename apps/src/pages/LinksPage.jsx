@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { ExternalLink, BookOpen } from 'lucide-react';
 import { linksCategories } from '@/data/LinksData';
 
 function LinksPage() {
+  const location = useLocation();
+  const [highlightedSection, setHighlightedSection] = useState(null);
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      setHighlightedSection(id);
+      
+      const timer = setTimeout(() => {
+        setHighlightedSection(null);
+      }, 700);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [location.hash, location.key]);
+
   return (
     <>
       <Helmet>
@@ -26,7 +43,6 @@ function LinksPage() {
         <section>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            {/* THIS IS THE MAGIC: CSS Columns layout packs boxes tightly regardless of height */}
             <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
               
               {linksCategories.map((category, index) => (
@@ -37,7 +53,11 @@ function LinksPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="break-inside-avoid bg-card border border-border rounded-2xl p-6 sm:p-8 shadow-sm scroll-mt-28" 
+                  className={`break-inside-avoid border rounded-2xl p-6 sm:p-8 scroll-mt-28 transition-all duration-700 ease-in-out ${
+                    highlightedSection === category.id
+                      ? 'bg-primary/10 shadow-2xl scale-[1.02] border-primary/30 z-10 relative ring-1 ring-primary/30'
+                      : 'bg-card border-border shadow-sm scale-100 z-0'
+                  }`}
                 >
                   <h2 className="text-xl font-bold mb-6 flex items-center border-b border-border/50 pb-4">
                     <BookOpen className="mr-3 text-primary h-5 w-5 flex-shrink-0" />
