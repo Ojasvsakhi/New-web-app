@@ -13,15 +13,43 @@ function ServicesPage() {
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.replace('#', '');
-      setHighlightedSection(id);
-      
-      const timer = setTimeout(() => {
-        setHighlightedSection(null);
-      }, 700);
-      
-      return () => clearTimeout(timer);
+      let clearTimer;
+      let observer;
+
+      const initialTimer = setTimeout(() => {
+        const element = document.getElementById(id);
+        
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          
+          observer = new IntersectionObserver((entries) => {
+            const [entry] = entries;
+            
+            if (entry.isIntersecting) {
+              
+              setHighlightedSection(id);
+              
+              clearTimer = setTimeout(() => {
+                setHighlightedSection(null);
+              }, 800);
+
+              observer.disconnect(); 
+            }
+          }, {
+            threshold: 0.5 
+          });
+
+          observer.observe(element);
+        }
+      }, 100);
+
+      return () => {
+        clearTimeout(initialTimer);
+        if (clearTimer) clearTimeout(clearTimer);
+        if (observer) observer.disconnect();
+      };
     }
-  }, [location.hash,location.key]);
+  }, [location.hash, location.key]);
 
   const services = [
     {

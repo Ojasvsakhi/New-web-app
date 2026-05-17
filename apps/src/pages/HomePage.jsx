@@ -14,6 +14,11 @@ function HomePage() {
   const heroRef = useRef(null);
   const overlayRef = useRef(null);
   
+  const headingRef = useRef(null);
+  const paragraphRef = useRef(null);
+
+  const btn1Ref = useRef(null);
+  const btn2Ref = useRef(null);
   const mousePosRef = useRef({ x: 0, y: 0 });
   const isHoveringRef = useRef(false);
 
@@ -69,13 +74,31 @@ function HomePage() {
   const updateSpotlight = () => {
     if (!heroRef.current || !overlayRef.current || !isHoveringRef.current) return;
     
-    const rect = heroRef.current.getBoundingClientRect();
-    const x = mousePosRef.current.x - rect.left;
-    const y = mousePosRef.current.y - rect.top;
+    const mouseX = mousePosRef.current.x;
+    const mouseY = mousePosRef.current.y;
+    
+    const heroRect = heroRef.current.getBoundingClientRect();
+    const bgX = mouseX - heroRect.left;
+    const bgY = mouseY - heroRect.top;
 
-    const mask = `radial-gradient(circle 150px at ${x}px ${y}px, transparent 0%, black 100%)`;
+    const mask = `radial-gradient(circle 150px at ${bgX}px ${bgY}px, transparent 0%, black 100%)`;
     overlayRef.current.style.maskImage = mask;
     overlayRef.current.style.webkitMaskImage = mask;
+    
+    const applyDynamicGradient = (ref, highlightColor, baseColor, radius = 150) => {
+      if (!ref.current) return;
+      const elRect = ref.current.getBoundingClientRect();
+      const elX = mouseX - elRect.left;
+      const elY = mouseY - elRect.top;
+      
+      ref.current.style.backgroundImage = `radial-gradient(circle ${radius}px at ${elX}px ${elY}px, ${highlightColor} 0%, ${baseColor} 100%)`;
+    }; 
+
+    applyDynamicGradient(headingRef, '#fbbf24', '#ffffff'); 
+    applyDynamicGradient(paragraphRef, '#fcd34d', '#e2e8f0'); 
+    
+    applyDynamicGradient(btn1Ref, '#24e2fb', '#1b4498', 120);
+    applyDynamicGradient(btn2Ref, 'rgba(251, 191, 36, 0.3)', 'transparent', 120);
   };
 
   const handleMouseMove = (e) => {
@@ -90,6 +113,15 @@ function HomePage() {
     const mask = `radial-gradient(circle 0px at 0px 0px, transparent 0%, black 100%)`;
     overlayRef.current.style.maskImage = mask;
     overlayRef.current.style.webkitMaskImage = mask;
+
+    const resetGradient = (ref, defaultState) => {
+      if (ref.current) ref.current.style.backgroundImage = defaultState;
+    };
+
+    resetGradient(headingRef, `linear-gradient(#ffffff, #ffffff)`);
+    resetGradient(paragraphRef, `linear-gradient(#e2e8f0, #e2e8f0)`);
+    resetGradient(btn1Ref, 'none');
+    resetGradient(btn2Ref, 'none');
   };
   
   useEffect(() => {
@@ -146,21 +178,43 @@ function HomePage() {
                   animate={{ opacity: 1, y: 0 }} 
                   transition={{ duration: 0.6 }}
                 >
-                  <h1 className="text-white mb-6">
+                  <h1 
+                    ref={headingRef}
+                    className="mb-6 text-transparent bg-clip-text transition-[background-image] duration-75"
+                    style={{ backgroundImage: 'linear-gradient(#ffffff, #ffffff)' }}
+                  >
                     Professional CA services
                   </h1>
-                  <p className="text-xl text-slate-200 mb-8 leading-relaxed">
+                  
+                  <p 
+                    ref={paragraphRef}
+                    className="text-xl mb-8 leading-relaxed text-transparent bg-clip-text transition-[background-image] duration-75"
+                    style={{ backgroundImage: 'linear-gradient(#e2e8f0, #e2e8f0)' }}
+                  >
                     Personalized accounting solutions tailored to your business needs. From tax planning to financial consulting, get expert guidance you can trust.
                   </p>
+
                   <div className="flex flex-col sm:flex-row gap-4">
                     <QuickContactSheet>
-                      <Button size="lg" className="text-base transition-all duration-200 active:scale-[0.98] group">
+                      <Button 
+                        ref={btn1Ref}
+                        size="lg" 
+                        className="text-base transition-all duration-200 active:scale-[0.98] group bg-[#1b4498] hover:bg-[#1b4498]/90 text-white hover:text-white border-0"
+                        style={{ transition: 'background-image 0.1s ease' }}
+                      >
                         Schedule consultation
                         <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </QuickContactSheet>
+                    
                     <Link to="/services">
-                      <Button size="lg" variant="outline" className="text-base bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 transition-all duration-200 active:scale-[0.98]">
+                      <Button 
+                        ref={btn2Ref}
+                        size="lg" 
+                        variant="outline" 
+                        className="text-base bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 hover:text-white transition-all duration-200 active:scale-[0.98]"
+                        style={{ transition: 'background-image 0.1s ease' }}
+                      >
                         View services
                       </Button>
                     </Link>
