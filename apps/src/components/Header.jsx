@@ -35,8 +35,12 @@ function Header() {
       path: '/services',
       dropdown: [
         {name: 'Tax planning & compliance', hash: 'tax-planning'},
+        {name: 'GST Planning and compliance', hash: 'gst-indirect'},
+        {name: 'Company Law Services', hash: 'company-law'},
+        {name: 'LLP Services', hash: 'llp-services'},
+        {name: 'RERA Services', hash: 'rera-services'},
+        {name: 'FEMA & NRI Advisory', hash: 'fema-nri'},
         {name: 'Audit services', hash: 'audit-services'},
-        {name: 'GST & indirect tax compliance', hash: 'gst-indirect'},
         {name: 'Financial consulting', hash: 'financial-consulting'},
         {name: 'Bookkeeping & accounting', hash: 'bookkeeping-accounting'},
         {name: 'Business advisory', hash: 'business-advisory'},

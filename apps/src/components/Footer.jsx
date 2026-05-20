@@ -89,6 +89,7 @@ function Footer() {
                 </button>
               
               <a 
+              // To show map in website for location
                 href="https://www.google.com/maps/@22.7236682,75.8661695,19.72z?entry=ttu&g_ep=EgoyMDI2MDUxMi4wIKXMDSoASAFQAw%3D%3D" 
                 target="_blank" 
                 rel="noopener noreferrer" 

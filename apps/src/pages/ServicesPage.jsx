@@ -2,9 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Calculator, Shield, FileText, TrendingUp, BookOpen, Briefcase, FileCheck } from 'lucide-react';
-import Header from '@/components/Header.jsx';
-import Footer from '@/components/Footer.jsx';
+import { 
+  Calculator, 
+  Shield, 
+  FileText, 
+  TrendingUp, 
+  BookOpen, 
+  Briefcase, 
+  FileCheck,
+  Building,
+  Users,
+  Home,
+  Globe 
+} from 'lucide-react';
 
 function ServicesPage() {
   const location = useLocation();
@@ -26,7 +36,6 @@ function ServicesPage() {
             const [entry] = entries;
             
             if (entry.isIntersecting) {
-              
               setHighlightedSection(id);
               
               clearTimer = setTimeout(() => {
@@ -55,50 +64,142 @@ function ServicesPage() {
     {
       id: 'tax-planning',
       icon: Calculator,
-      title: 'Tax planning & compliance',
-      description: 'Strategic tax planning services to minimize your tax liabilities while ensuring full compliance with income tax regulations. We provide comprehensive tax return preparation, advance tax calculations, and year-round tax advisory to help you make informed financial decisions.',
+      title: 'Direct Tax planning & compliance',
+      items: [
+        'Strategic tax planning and return preparation',
+        'Advance tax calculations and year-round advisory',
+        'Tax Audit & Compliance',
+        'TDS/TCS Compliance'
+      ],
       benefits: 'Reduce tax burden, avoid penalties, optimize deductions, and maintain compliance with changing tax laws.'
+    },
+    {
+      id: 'gst-indirect',
+      icon: FileText,
+      title: 'Goods and services Tax (GST) Planning and compliance',
+      items: [
+        'GST registration, return preparation, and filing',
+        'Input tax credit reconciliation and GST audits',
+        'GST Litigation & Advisory',
+        'GST Refund & Assessment Support'
+      ],
+      benefits: 'Timely compliance, maximized input tax credits, reduced audit risks, and expert guidance on GST regulations.'
+    },
+    {
+      id: 'company-law',
+      icon: Building,
+      title: 'Company Law Services',
+      items: [
+        'Private Limited, OPC & Section 8 Company Registration',
+        'ROC Compliance & Annual Filings',
+        'Director KYC & DIN Related Services',
+        'Share Allotment & Transfer Compliance',
+        'Drafting of Board Resolutions & Minutes',
+        'Increase in Authorized Share Capital & Change in Registered Office',
+        'Strike Off / Closure of Companies',
+        'Corporate Compliance Advisory'
+      ],
+      benefits: 'Seamless incorporation, strict regulatory adherence, and optimized corporate governance.'
+    },
+    {
+      id: 'llp-services',
+      icon: Users,
+      title: 'LLP Services',
+      items: [
+        'LLP Incorporation & Agreement Drafting & Filing',
+        'Annual Return & Statement of Accounts Filing',
+        'Partner Admission / Resignation',
+        'Change in LLP Name or Registered Office',
+        'LLP Closure / Strike Off',
+        'Compliance Advisory for LLPs'
+      ],
+      benefits: 'Hassle-free LLP management, legal compliance, and smooth structural transitions.'
+    },
+    {
+      id: 'rera-services',
+      icon: Home,
+      title: 'RERA Services',
+      items: [
+        'RERA Registration for Projects & Agents',
+        'Quarterly & Annual RERA Compliance',
+        'CA Certification under RERA',
+        'Project Fund Utilization Certification',
+        'Advisory for Developers & Landowners'
+      ],
+      benefits: 'Ensure real estate regulatory compliance, project transparency, and builder credibility.'
+    },
+    {
+      id: 'fema-nri',
+      icon: Globe,
+      title: 'FEMA & NRI Advisory',
+      items: [
+        'FEMA Compliance Advisory',
+        'NRI Taxation Services',
+        'FDI & RBI Compliance',
+        'Overseas Investment Advisory',
+        'Remittance & Repatriation Advisory',
+        'FEMA Reporting Assistance'
+      ],
+      benefits: 'Smooth cross-border transactions, regulatory adherence, and optimized international tax planning.'
     },
     {
       id: 'audit-services',
       icon: Shield,
       title: 'Audit services',
-      description: 'Professional audit and assurance services including statutory audits, internal audits, and tax audits. Our thorough examination of financial records ensures accuracy, identifies areas for improvement, and provides stakeholders with confidence in your financial reporting.',
+      items: [
+        'Statutory audits',
+        'Internal audits',
+        'Tax audits',
+        'Thorough examination of financial records for accuracy and improvement'
+      ],
       benefits: 'Enhanced credibility, improved internal controls, risk mitigation, and regulatory compliance.'
-    },
-    {
-      id: 'gst-indirect',
-      icon: FileText,
-      title: 'GST & indirect tax compliance',
-      description: 'Complete GST services from registration to filing and compliance. We handle GST return preparation, input tax credit reconciliation, GST audits, and advisory on complex GST matters to keep your business compliant and efficient.',
-      benefits: 'Timely compliance, maximized input tax credits, reduced audit risks, and expert guidance on GST regulations.'
     },
     {
       id: 'financial-consulting',
       icon: TrendingUp,
       title: 'Financial consulting',
-      description: 'Strategic financial advisory services to help your business grow. We provide financial planning, budgeting, cash flow management, investment advisory, and business valuation services tailored to your specific needs and goals.',
+      items: [
+        'Financial planning & budgeting',
+        'Cash flow management',
+        'Investment advisory',
+        'Business valuation services'
+      ],
       benefits: 'Better financial decisions, improved profitability, sustainable growth, and long-term financial stability.'
     },
     {
       id: 'bookkeeping-accounting',
       icon: BookOpen,
       title: 'Bookkeeping & accounting',
-      description: 'Comprehensive bookkeeping and accounting services to maintain accurate financial records. We handle day-to-day transaction recording, bank reconciliation, accounts payable/receivable management, and monthly financial reporting.',
+      items: [
+        'Day-to-day transaction recording',
+        'Bank reconciliation',
+        'Accounts payable/receivable management',
+        'Monthly financial reporting'
+      ],
       benefits: 'Accurate records, time savings, better cash flow visibility, and informed business decisions.'
     },
     {
       id: 'business-advisory',
       icon: Briefcase,
       title: 'Business advisory',
-      description: 'Expert business advisory services covering business structure optimization, compliance management, financial restructuring, and strategic planning. We help you navigate complex business decisions with confidence.',
+      items: [
+        'Business structure optimization',
+        'Compliance management',
+        'Financial restructuring',
+        'Strategic planning'
+      ],
       benefits: 'Strategic clarity, risk management, operational efficiency, and sustainable business growth.'
     },
     {
       id: 'financial-statement',
       icon: FileCheck,
       title: 'Financial statement preparation',
-      description: 'Professional preparation of financial statements including balance sheets, profit & loss statements, and cash flow statements. We ensure your financial statements are accurate, compliant, and provide meaningful insights into your business performance.',
+      items: [
+        'Balance sheets preparation',
+        'Profit & loss statements',
+        'Cash flow statements',
+        'Compliance with accounting standards'
+      ],
       benefits: 'Accurate reporting, stakeholder confidence, compliance with accounting standards, and better financial analysis.'
     }
   ];
@@ -121,7 +222,7 @@ function ServicesPage() {
                 transition={{ duration: 0.6 }}
                 className="text-center max-w-3xl mx-auto"
               >
-                <h1 className="mb-6">Our services</h1>
+                <h1 className="mb-6 text-4xl md:text-5xl font-bold tracking-tight">Our services</h1>
                 <p className="text-xl text-muted-foreground leading-relaxed">
                   Comprehensive chartered accountant services designed to support your business growth and ensure financial compliance
                 </p>
@@ -148,16 +249,23 @@ function ServicesPage() {
                         : 'bg-transparent scale-100 z-0'
                     }`}
                   >
-                    <div className="flex-1 space-y-6">
+                    <div className="flex-1 space-y-6 w-full">
                       <div className="space-y-3">
                         <h2 className="text-3xl md:text-4xl font-bold transition-colors duration-1000">
                           {service.title}
                         </h2>
                       </div>
-
-                      <p className="text-lg text-muted-foreground leading-relaxed">
-                        {service.description}
-                      </p>
+                      <div className="flex flex-wrap gap-2.5">
+                        {service.items.map((item, idx) => (
+                          <span 
+                            key={idx} 
+                            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-sm font-medium text-foreground/80 hover:border-primary/40 hover:bg-primary/5 transition-colors cursor-default"
+                          >
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                            {item}
+                          </span>
+                        ))}
+                      </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                         <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 transition-hover duration-300 hover:border-secondary/30">
@@ -191,14 +299,14 @@ function ServicesPage() {
 
           <section className="py-20 bg-muted">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h2 className="mb-6">Need a customized solution?</h2>
+              <h2 className="mb-6 text-3xl font-bold">Need a customized solution?</h2>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
                 Every business is unique. Contact us to discuss how we can tailor our services to meet your specific requirements.
               </p>
             </div>
           </section>
         </main>
-
+        
       </div>
     </>
   );
