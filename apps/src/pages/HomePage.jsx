@@ -25,18 +25,22 @@ function HomePage() {
   const services = [{
     icon: Calculator,
     title: 'Tax planning & compliance',
+    hash: 'tax-planning',
     description: 'Strategic tax planning to minimize liabilities while ensuring full compliance with current regulations.'
   }, {
     icon: Shield,
     title: 'Audit services',
+    hash: 'audit-services',
     description: 'Comprehensive audit and assurance services to maintain financial integrity and regulatory compliance.'
   }, {
     icon: FileText,
     title: 'GST compliance',
+    hash: 'gst-indirect',
     description: 'Expert guidance on GST registration, filing, and compliance to keep your business on track.'
   }, {
     icon: TrendingUp,
     title: 'Financial consulting',
+    hash: 'financial-consulting',
     description: 'Strategic financial advice to help your business grow and achieve long-term financial goals.'
   }];
 
@@ -154,7 +158,7 @@ function HomePage() {
           >
             <div className="absolute inset-0 z-0">
               <img 
-                src="https://images.unsplash.com/photo-1584346881556-19b8804d414f" 
+                src="https://images.unsplash.com/photo-1584346881556-19b8804d414f?auto=format&w=1920&q=50" 
                 alt="Professional office environment with modern workspace" 
                 className="w-full h-full object-cover" 
               />
@@ -194,7 +198,7 @@ function HomePage() {
                     Personalized accounting solutions tailored to your business needs. From tax planning to financial consulting, get expert guidance you can trust.
                   </p>
 
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
                     <QuickContactSheet>
                       <Button 
                         ref={btn1Ref}
@@ -207,17 +211,16 @@ function HomePage() {
                       </Button>
                     </QuickContactSheet>
                     
-                    <Link to="/services">
-                      <Button 
-                        ref={btn2Ref}
-                        size="lg" 
-                        variant="outline" 
-                        className="text-base bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 hover:text-white transition-all duration-200 active:scale-[0.98]"
-                        style={{ transition: 'background-image 0.1s ease' }}
-                      >
-                        View services
-                      </Button>
-                    </Link>
+                    <Button
+                      asChild
+                      ref={btn2Ref}
+                      size="lg"
+                      variant="outline"
+                      className="text-base bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/10 hover:text-white transition-all duration-200 active:scale-[0.98]"
+                      style={{ transition: 'background-image 0.1s ease' }}
+                    >
+                      <Link to="/services">View services</Link>
+                    </Button>
                   </div>
                 </motion.div>
               </div>
@@ -234,16 +237,20 @@ function HomePage() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {services.map((service, index) => <ServiceCard key={index} {...service} index={index} />)}
+                {services.map((service, index) => (
+                  <Link key={service.hash || index} to={`/services#${service.hash}`} className="group">
+                    <ServiceCard {...service} index={index} className="cursor-pointer" />
+                  </Link>
+                ))}
               </div>
 
               <div className="text-center mt-12">
-                <Link to="/services">
-                  <Button variant="outline" size="lg" className="transition-all duration-200 active:scale-[0.98]">
+                <Button asChild variant="outline" size="lg" className="transition-all duration-200 active:scale-[0.98]">
+                  <Link to="/services">
                     View all services
                     <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
             </div>
           </section>

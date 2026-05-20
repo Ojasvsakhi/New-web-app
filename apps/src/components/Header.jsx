@@ -133,7 +133,7 @@ function Header() {
               <motion.div
                 className="absolute bg-primary rounded-lg pointer-events-none z-0"
                 animate={boxStyle}
-                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                transition={{ type: "spring", stiffness: 120, damping: 20, mass: 1.2 }}
               />
 
               {navLinks.map((link) => {
