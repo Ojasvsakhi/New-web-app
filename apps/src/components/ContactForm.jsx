@@ -101,11 +101,16 @@ function ContactForm() {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="tax-planning">Tax planning & compliance</SelectItem>
-            <SelectItem value="audit">Audit services</SelectItem>
-            <SelectItem value="gst">GST & indirect tax</SelectItem>
+            <SelectItem value="gst-indirect">GST Planning and compliance</SelectItem>
+            <SelectItem value="company-law">Company Law Services</SelectItem>
+            <SelectItem value="llp-services">LLP Services</SelectItem>
+            <SelectItem value="rera-services">RERA Services</SelectItem>
+            <SelectItem value="fema-nri">FEMA & NRI Advisory</SelectItem>
+            <SelectItem value="audit-services">Audit services</SelectItem>
             <SelectItem value="financial-consulting">Financial consulting</SelectItem>
-            <SelectItem value="bookkeeping">Bookkeeping & accounting</SelectItem>
+            <SelectItem value="bookkeeping-accounting">Bookkeeping & accounting</SelectItem>
             <SelectItem value="business-advisory">Business advisory</SelectItem>
+            <SelectItem value="financial-statement">Financial statement preparation</SelectItem>
             <SelectItem value="other">Other</SelectItem>
           </SelectContent>
         </Select>
