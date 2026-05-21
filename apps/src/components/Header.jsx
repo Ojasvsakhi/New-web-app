@@ -9,7 +9,7 @@ function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoveredNav, setHoveredNav] = useState(null);
   const [expandedMobileNav, setExpandedMobileNav] = useState(null);
-  
+  const isFirstRender = useRef(true);
   const location = useLocation();
   const navigate = useNavigate();
   const navRef = useRef(null);
@@ -86,6 +86,11 @@ function Header() {
       }
     };
     updateBoxPosition();
+    if (isFirstRender.current) {
+      setTimeout(() => {
+        isFirstRender.current = false;
+      }, 50); 
+    }
     window.addEventListener('resize', updateBoxPosition);
     return () => window.removeEventListener('resize', updateBoxPosition);
   }, [location.pathname]);
@@ -135,9 +140,13 @@ function Header() {
             <nav ref={navRef} className="flex items-center space-x-2 relative mr-6">
               
               <motion.div
-                className="absolute bg-primary rounded-lg pointer-events-none z-0"
-                animate={boxStyle}
-                transition={{ type: "spring", stiffness: 120, damping: 20, mass: 1.2 }}
+                  className="absolute bg-primary rounded-lg pointer-events-none z-0"
+                  animate={boxStyle}
+                  transition={
+                    isFirstRender.current 
+                      ? { duration: 0 }
+                      : { type: "spring", stiffness: 120, damping: 20, mass: 1.2 }
+                  }
               />
 
               {navLinks.map((link) => {
