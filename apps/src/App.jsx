@@ -11,6 +11,8 @@ import ContactPage from './pages/ContactPage.jsx';
 import LinksPage from './pages/LinksPage.jsx';
 import PrivacyPage from './pages/PrivacyPage.jsx';
 import TermsPage from './pages/TermsPage.jsx';
+import BlogPage from './pages/BlogPage.jsx';
+import AdminPage from './pages/Adminpage.jsx';
 function App() {
   return (
     <Router>
@@ -27,6 +29,8 @@ function App() {
             <Route path="/links" element={<LinksPage/>} />
             <Route path="/terms" element={<TermsPage/>} />
             <Route path="/privacy" element={<PrivacyPage/>} />
+            <Route path="/blogs" element={<BlogPage />} />
+            <Route path="/admin-portal" element={<AdminPage />} />
           </Routes>
         </main>
 

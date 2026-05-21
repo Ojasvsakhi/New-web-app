@@ -12,7 +12,7 @@ function ContactPage() {
     e.preventDefault();
     navigator.clipboard.writeText(phoneNumber);
     setPhoneCopied(true);
-    setTimeout(() => setPhoneCopied(false), 2500);
+    setTimeout(() => setPhoneCopied(false), 1000);
   };
 
   const contactInfo = [
