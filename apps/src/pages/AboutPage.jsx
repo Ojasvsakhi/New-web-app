@@ -57,7 +57,7 @@ function AboutPage() {
                 transition={{ duration: 0.5 }}
                 className="text-center max-w-3xl mx-auto"
               >
-                <h1 className="mb-6">About Rupesh Sakhi & Co</h1>
+                <h1 className="mb-6">About<span className="text-blue-600"> Us</span></h1>
                 <p className="text-xl text-muted-foreground leading-relaxed">
                   Professional chartered accountant services built on trust, expertise, and personalized attention
                 </p>

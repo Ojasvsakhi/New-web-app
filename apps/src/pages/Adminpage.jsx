@@ -143,7 +143,7 @@ export default function AdminPage() {
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-sm">
               <PenTool className="text-white h-4 w-4" />
             </div>
-            <span className="font-semibold text-slate-900 tracking-tight">Publisher Dashboard</span>
+            <span className="font-semibold text-slate-900 tracking-tight">Publisher <span className='text-blue-600'>Dashboard</span></span>
           </div>
           <Button variant="ghost" size="sm" onClick={() => supabase.auth.signOut()} className="text-slate-500 hover:text-slate-900">
             <LogOut className="h-4 w-4 mr-2" />

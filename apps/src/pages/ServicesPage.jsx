@@ -222,7 +222,7 @@ function ServicesPage() {
                 transition={{ duration: 0.6 }}
                 className="text-center max-w-3xl mx-auto"
               >
-                <h1 className="mb-6 text-4xl md:text-5xl font-bold tracking-tight">Our services</h1>
+                <h1 className="mb-6 text-4xl md:text-5xl font-bold tracking-tight">Our <span className="text-blue-600">Services</span></h1>
                 <p className="text-xl text-muted-foreground leading-relaxed">
                   Comprehensive chartered accountant services designed to support your business growth and ensure financial compliance
                 </p>

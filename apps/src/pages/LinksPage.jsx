@@ -32,7 +32,7 @@ function LinksPage() {
         <section className="py-24 bg-gradient-to-br from-primary/5 via-background to-secondary/5 mb-12">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-              <h1 className="mb-6 text-4xl md:text-5xl font-bold">Useful Links</h1>
+              <h1 className="mb-6 text-4xl md:text-5xl font-bold">Useful <span className="text-blue-600">Links</span></h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                 A curated directory of essential portals for Indian tax, legal, and financial regulatory bodies.
               </p>

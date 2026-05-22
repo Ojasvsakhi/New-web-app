@@ -84,7 +84,7 @@ function ContactPage() {
               <span>We're here to help</span>
             </span>
             <h1 className="mb-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Let's start a <span className="text-blue-600">conversation.</span>
+              Let's start a <span className="text-blue-600">Conversation.</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
               Whether you have a quick question, need technical support, or want to discuss a comprehensive financial strategy, our doors are open.
