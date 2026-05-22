@@ -22,6 +22,10 @@ function HomePage() {
   const mousePosRef = useRef({ x: 0, y: 0 });
   const isHoveringRef = useRef(false);
 
+  useEffect(() => {
+    sessionStorage.setItem('pageTitleData', JSON.stringify({ prefix: '', highlight: '' }));
+  }, []);
+  
   const services = [{
     icon: Calculator,
     title: 'Tax planning & compliance',

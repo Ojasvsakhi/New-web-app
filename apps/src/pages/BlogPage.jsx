@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, BookOpen, Search, ArrowLeft, Clock, ChevronRight, TrendingUp, X, ChevronDown } from 'lucide-react';
-
+import TypewriterTitle from '../components/TypewriterTitle';
 function useDebounce(value, delay) {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
@@ -109,25 +109,19 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       
-      <section className="relative py-24 overflow-hidden bg-background">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full opacity-30 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-100/40 via-blue-50/20 to-transparent blur-3xl rounded-full" />
-        </div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            initial={{ opacity: 0}}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
             <span className="inline-flex items-center space-x-2 bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
               <TrendingUp className="w-4 h-4" />
               <span>Market Insights</span>
             </span>
-            <h1 className="mb-6 text-4xl md:text-5xl font-bold tracking-tight text-foreground" style={{ fontFamily: 'Playfair Display, serif' }}>
-              The Financial <span className="text-blue-600">Briefing.</span>
-            </h1>
+            <TypewriterTitle prefix="Financial " highlight="Briefing" />
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
               Daily updates, tax strategies, and regulatory shifts curated specifically for growing businesses and professionals.
             </p>

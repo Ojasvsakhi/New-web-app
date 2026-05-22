@@ -15,6 +15,7 @@ import {
   Home,
   Globe 
 } from 'lucide-react';
+import TypewriterTitle from '../components/TypewriterTitle';
 
 function ServicesPage() {
   const location = useLocation();
@@ -65,6 +66,7 @@ function ServicesPage() {
       id: 'tax-planning',
       icon: Calculator,
       title: 'Direct Tax planning & compliance',
+      theme: { bgLight: 'bg-blue-500/10', hoverBg: 'hover:bg-blue-500/10', ring: 'ring-blue-500/30', text: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-500', gradientFrom: 'from-blue-500/30' },
       items: [
         'Strategic tax planning and return preparation',
         'Advance tax calculations and year-round advisory',
@@ -77,6 +79,7 @@ function ServicesPage() {
       id: 'gst-indirect',
       icon: FileText,
       title: 'Goods and services Tax (GST) Planning and compliance',
+      theme: { bgLight: 'bg-emerald-500/10', hoverBg: 'hover:bg-emerald-500/10', ring: 'ring-emerald-500/30', text: 'text-emerald-600 dark:text-emerald-400', bg: 'bg-emerald-500', gradientFrom: 'from-emerald-500/30' },
       items: [
         'GST registration, return preparation, and filing',
         'Input tax credit reconciliation and GST audits',
@@ -89,6 +92,7 @@ function ServicesPage() {
       id: 'company-law',
       icon: Building,
       title: 'Company Law Services',
+      theme: { bgLight: 'bg-violet-500/10', hoverBg: 'hover:bg-violet-500/10', ring: 'ring-violet-500/30', text: 'text-violet-600 dark:text-violet-400', bg: 'bg-violet-500', gradientFrom: 'from-violet-500/30' },
       items: [
         'Private Limited, OPC & Section 8 Company Registration',
         'ROC Compliance & Annual Filings',
@@ -105,6 +109,7 @@ function ServicesPage() {
       id: 'llp-services',
       icon: Users,
       title: 'LLP Services',
+      theme: { bgLight: 'bg-amber-500/10', hoverBg: 'hover:bg-amber-500/10', ring: 'ring-amber-500/30', text: 'text-amber-600 dark:text-amber-400', bg: 'bg-amber-500', gradientFrom: 'from-amber-500/30' },
       items: [
         'LLP Incorporation & Agreement Drafting & Filing',
         'Annual Return & Statement of Accounts Filing',
@@ -119,6 +124,7 @@ function ServicesPage() {
       id: 'rera-services',
       icon: Home,
       title: 'RERA Services',
+      theme: { bgLight: 'bg-rose-500/10', hoverBg: 'hover:bg-rose-500/10', ring: 'ring-rose-500/30', text: 'text-rose-600 dark:text-rose-400', bg: 'bg-rose-500', gradientFrom: 'from-rose-500/30' },
       items: [
         'RERA Registration for Projects & Agents',
         'Quarterly & Annual RERA Compliance',
@@ -132,6 +138,7 @@ function ServicesPage() {
       id: 'fema-nri',
       icon: Globe,
       title: 'FEMA & NRI Advisory',
+      theme: { bgLight: 'bg-cyan-500/10', hoverBg: 'hover:bg-cyan-500/10', ring: 'ring-cyan-500/30', text: 'text-cyan-600 dark:text-cyan-400', bg: 'bg-cyan-500', gradientFrom: 'from-cyan-500/30' },
       items: [
         'FEMA Compliance Advisory',
         'NRI Taxation Services',
@@ -146,6 +153,7 @@ function ServicesPage() {
       id: 'audit-services',
       icon: Shield,
       title: 'Audit services',
+      theme: { bgLight: 'bg-indigo-500/10', hoverBg: 'hover:bg-indigo-500/10', ring: 'ring-indigo-500/30', text: 'text-indigo-600 dark:text-indigo-400', bg: 'bg-indigo-500', gradientFrom: 'from-indigo-500/30' },
       items: [
         'Statutory audits',
         'Internal audits',
@@ -158,6 +166,7 @@ function ServicesPage() {
       id: 'financial-consulting',
       icon: TrendingUp,
       title: 'Financial consulting',
+      theme: { bgLight: 'bg-teal-500/10', hoverBg: 'hover:bg-teal-500/10', ring: 'ring-teal-500/30', text: 'text-teal-600 dark:text-teal-400', bg: 'bg-teal-500', gradientFrom: 'from-teal-500/30' },
       items: [
         'Financial planning & budgeting',
         'Cash flow management',
@@ -170,6 +179,7 @@ function ServicesPage() {
       id: 'bookkeeping-accounting',
       icon: BookOpen,
       title: 'Bookkeeping & accounting',
+      theme: { bgLight: 'bg-fuchsia-500/10', hoverBg: 'hover:bg-fuchsia-500/10', ring: 'ring-fuchsia-500/30', text: 'text-fuchsia-600 dark:text-fuchsia-400', bg: 'bg-fuchsia-500', gradientFrom: 'from-fuchsia-500/30' },
       items: [
         'Day-to-day transaction recording',
         'Bank reconciliation',
@@ -182,6 +192,7 @@ function ServicesPage() {
       id: 'business-advisory',
       icon: Briefcase,
       title: 'Business advisory',
+      theme: { bgLight: 'bg-orange-500/10', hoverBg: 'hover:bg-orange-500/10', ring: 'ring-orange-500/30', text: 'text-orange-600 dark:text-orange-400', bg: 'bg-orange-500', gradientFrom: 'from-orange-500/30' },
       items: [
         'Business structure optimization',
         'Compliance management',
@@ -194,6 +205,7 @@ function ServicesPage() {
       id: 'financial-statement',
       icon: FileCheck,
       title: 'Financial statement preparation',
+      theme: { bgLight: 'bg-sky-500/10', hoverBg: 'hover:bg-sky-500/10', ring: 'ring-sky-500/30', text: 'text-sky-600 dark:text-sky-400', bg: 'bg-sky-500', gradientFrom: 'from-sky-500/30' },
       items: [
         'Balance sheets preparation',
         'Profit & loss statements',
@@ -216,14 +228,14 @@ function ServicesPage() {
         <main className="flex-1">
           <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }} 
+                transition={{ duration: 0.6 }} 
                 className="text-center max-w-3xl mx-auto"
               >
-                <h1 className="mb-6 text-4xl md:text-5xl font-bold tracking-tight">Our <span className="text-blue-600">Services</span></h1>
-                <p className="text-xl text-muted-foreground leading-relaxed">
+                <TypewriterTitle prefix="Core " highlight="Services" />
+                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
                   Comprehensive chartered accountant services designed to support your business growth and ensure financial compliance
                 </p>
               </motion.div>
@@ -232,7 +244,7 @@ function ServicesPage() {
 
           <section className="py-20 bg-background overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="space-y-16">
+              <div className="space-y-12">
                 {services.map((service, index) => (
                   <motion.div
                     key={service.id}
@@ -241,52 +253,56 @@ function ServicesPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className={`flex flex-col md:flex-row items-center gap-10 lg:gap-16 p-6 rounded-[2rem] transition-all duration-700 ease-in-out ${
+                    className={`group relative flex flex-col md:flex-row items-center gap-10 lg:gap-12 p-8 lg:p-10 rounded-[2.5rem] border border-border shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-slate-300 dark:hover:border-slate-700 ${
                       index % 2 === 1 ? 'md:flex-row-reverse' : ''
                     } ${
                       highlightedSection === service.id 
-                        ? 'bg-primary/10 shadow-2xl scale-[1.02] ring-1 ring-primary/30 z-10 relative' 
-                        : 'bg-transparent scale-100 z-0'
+                        ? `${service.theme.bgLight} ring-2 ${service.theme.ring} scale-[1.02] shadow-2xl z-10` 
+                        : 'bg-card z-0'
                     }`}
                   >
-                    <div className="flex-1 space-y-6 w-full">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${service.theme.gradientFrom} to-transparent opacity-0 group-hover:opacity-30 transition-opacity duration-500 rounded-[2.5rem] pointer-events-none`} />
+
+                    <div className="flex-1 space-y-6 w-full relative z-10">
                       <div className="space-y-3">
-                        <h2 className="text-3xl md:text-4xl font-bold transition-colors duration-1000">
+                        <h2 className="text-3xl md:text-4xl font-bold text-foreground transition-colors duration-500">
                           {service.title}
                         </h2>
                       </div>
+                      
                       <div className="flex flex-wrap gap-2.5">
                         {service.items.map((item, idx) => (
                           <span 
                             key={idx} 
-                            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-sm font-medium text-foreground/80 hover:border-primary/40 hover:bg-primary/5 transition-colors cursor-default"
+                            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-background border border-border text-sm font-medium text-foreground/80 transition-colors duration-300 ${service.theme.hoverBg}`}
                           >
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                            <div className={`w-1.5 h-1.5 rounded-full ${service.theme.bg}`} />
                             {item}
                           </span>
                         ))}
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 transition-hover duration-300 hover:border-secondary/30">
+                        <div className="p-4 rounded-2xl bg-muted/40 border border-border transition-colors duration-300 group-hover:bg-background">
                           <p className="text-xs font-bold text-secondary uppercase mb-1">Impact</p>
                           <p className="text-sm text-foreground/80 leading-snug">{service.benefits}</p>
                         </div>
-                        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800">
+                        <div className="p-4 rounded-2xl bg-muted/40 border border-border transition-colors duration-300 group-hover:bg-background">
                           <p className="text-xs font-bold text-secondary uppercase mb-1">Expertise</p>
                           <p className="text-sm text-foreground/80 leading-snug">Direct handling by CA with 13+ years experience.</p>
                         </div>
                       </div>
                     </div>
-                    <div className="flex-1 w-full max-w-md">
-                      <div className="relative group">
-                        <div className="absolute -inset-4 bg-gradient-to-tr from-secondary/20 to-primary/20 rounded-[2.5rem] blur-2xl opacity-50 group-hover:opacity-80 transition-opacity duration-500" />
+
+                    <div className="flex-1 w-full max-w-md relative z-10">
+                      <div className="relative group/image">
+                        <div className={`absolute -inset-8 bg-gradient-to-tr ${service.theme.gradientFrom} to-transparent rounded-[2.5rem] blur-3xl opacity-40 group-hover:opacity-70 transition-opacity duration-500`} />
                         
-                        <div className="relative h-80 w-full rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl flex items-center justify-center overflow-hidden shadow-2xl">
-                          <service.icon className="absolute -bottom-8 -right-8 h-64 w-64 text-slate-200/30 dark:text-slate-800/20 rotate-12 transition-transform duration-700 group-hover:rotate-0 group-hover:scale-110" />
+                        <div className="relative h-72 lg:h-80 w-full rounded-[2rem] border border-border bg-background/50 backdrop-blur-xl flex items-center justify-center overflow-hidden shadow-lg">
+                          <service.icon className={`absolute -bottom-8 -right-8 h-64 w-64 ${service.theme.text} opacity-10 rotate-12 transition-transform duration-700 group-hover:rotate-0 group-hover:scale-110`} />
                           
-                          <div className="relative p-8 rounded-3xl bg-white dark:bg-slate-800 shadow-xl border border-slate-100 dark:border-slate-700 transform transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
-                            <service.icon className="h-20 w-20 text-primary" />
+                          <div className="relative p-6 lg:p-8 rounded-3xl bg-background shadow-xl border border-border transform transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
+                            <service.icon className={`h-16 w-16 lg:h-20 lg:w-20 ${service.theme.text}`} />
                           </div>
                         </div>
                       </div>

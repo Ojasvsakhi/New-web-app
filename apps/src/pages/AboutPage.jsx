@@ -5,6 +5,8 @@ import { Award, Target, Users, Zap } from 'lucide-react';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
 import profileImage from '@/assets/photo.jpg';
+import TypewriterTitle from '../components/TypewriterTitle';
+
 function AboutPage() {
   const advantages = [
     {
@@ -52,13 +54,13 @@ function AboutPage() {
           <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 0}}
+                animate={{ opacity: 1}}
+                transition={{ duration: 0.6 }}
                 className="text-center max-w-3xl mx-auto"
               >
-                <h1 className="mb-6">About<span className="text-blue-600"> Us</span></h1>
-                <p className="text-xl text-muted-foreground leading-relaxed">
+                <TypewriterTitle prefix="About " highlight="Us" />
+                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
                   Professional chartered accountant services built on trust, expertise, and personalized attention
                 </p>
               </motion.div>

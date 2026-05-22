@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { ExternalLink, BookOpen } from 'lucide-react';
 import { linksCategories } from '@/data/LinksData';
-
+import TypewriterTitle from '../components/TypewriterTitle';
 function LinksPage() {
   const location = useLocation();
   const [highlightedSection, setHighlightedSection] = useState(null);
@@ -29,12 +29,17 @@ function LinksPage() {
       </Helmet>
 
       <div className="min-h-screen bg-background pb-24">
-        <section className="py-24 bg-gradient-to-br from-primary/5 via-background to-secondary/5 mb-12">
+        <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
           <div className="max-w-7xl mx-auto px-4 text-center">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-              <h1 className="mb-6 text-4xl md:text-5xl font-bold">Useful <span className="text-blue-600">Links</span></h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                A curated directory of essential portals for Indian tax, legal, and financial regulatory bodies.
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              className="text-center max-w-3xl mx-auto"
+            >
+              <TypewriterTitle prefix="Useful " highlight="Links" />
+              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                Important resources and government portals for your financial needs
               </p>
             </motion.div>
           </div>

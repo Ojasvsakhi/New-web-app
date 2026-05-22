@@ -83,6 +83,11 @@ function Header() {
           height: activeElement.offsetHeight,
           opacity: 1,
         });
+      } else {
+        setBoxStyle((prev) => ({
+          ...prev,
+          opacity: 0,
+        }));
       }
     };
     updateBoxPosition();
