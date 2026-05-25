@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Calendar, ChevronDown } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { Menu, X, Calendar, ChevronDown, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 import QuickContactSheet from '@/components/QuickContactSheet.jsx';
@@ -13,13 +14,16 @@ function Header() {
   const location = useLocation();
   const navigate = useNavigate();
   const navRef = useRef(null);
+  const { theme, setTheme } = useTheme();
   
   const [boxStyle, setBoxStyle] = useState({ left: 0, width: 0, top: 0, height: 0, opacity: 0 });
-    const handleLinkClick = (path) => {
-      if (location.pathname === path) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    };
+
+  const handleLinkClick = (path) => {
+    if (location.pathname === path) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const navLinks = [
     { 
       name: 'Home', 
@@ -128,7 +132,7 @@ function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 w-full z-50 bg-card/80 backdrop-blur-sm border-b border-border">
+    <header className="fixed top-0 left-0 right-0 w-full z-50 bg-card/80 backdrop-blur-sm border-b border-border transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
@@ -142,7 +146,7 @@ function Header() {
           </Link>
 
           <div className="hidden md:flex items-center">
-            <nav ref={navRef} className="flex items-center space-x-2 relative mr-6">
+            <nav ref={navRef} className="flex items-center space-x-2 relative mr-4">
               
               <motion.div
                   className="absolute bg-primary rounded-lg pointer-events-none z-0"
@@ -209,14 +213,39 @@ function Header() {
                 Let's talk
               </Button>
             </QuickContactSheet>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="ml-4 rounded-full relative overflow-hidden transition-all duration-300 hover:bg-primary/10 hover:text-primary"
+            >
+              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
           </div>
 
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-muted transition-all duration-200"
-          >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="rounded-full relative overflow-hidden transition-all duration-300 hover:bg-primary/10 hover:text-primary"
+            >
+              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-lg hover:bg-muted transition-all duration-200"
+            >
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+
         </div>
 
         <AnimatePresence>
@@ -225,7 +254,7 @@ function Header() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="md:hidden border-t border-border overflow-hidden"
+              className="md:hidden border-t border-border overflow-hidden bg-card"
             >
               <div className="flex flex-col space-y-1 py-4">
                 {navLinks.map((link) => (

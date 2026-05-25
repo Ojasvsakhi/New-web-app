@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import { ThemeProvider } from 'next-themes';
 import { Toaster } from '@/components/ui/sonner';
 import ScrollToTop from './components/ScrollToTop.jsx';
 import Header from './components/Header.jsx';
@@ -15,29 +16,31 @@ import BlogPage from './pages/BlogPage.jsx';
 import AdminPage from './pages/Adminpage.jsx';
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="flex flex-col min-h-screen">
-        <Header />
-        
-        <main className="flex-1 pt-20">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/links" element={<LinksPage/>} />
-            <Route path="/terms" element={<TermsPage/>} />
-            <Route path="/privacy" element={<PrivacyPage/>} />
-            <Route path="/blogs" element={<BlogPage />} />
-            <Route path="/admin-portal" element={<AdminPage />} />
-          </Routes>
-        </main>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <Router>
+        <ScrollToTop />
+        <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300">
+          <Header />
+          
+          <main className="flex-1 pt-20">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/links" element={<LinksPage/>} />
+              <Route path="/terms" element={<TermsPage/>} />
+              <Route path="/privacy" element={<PrivacyPage/>} />
+              <Route path="/blogs" element={<BlogPage />} />
+              <Route path="/admin-portal" element={<AdminPage />} />
+            </Routes>
+          </main>
 
-        <Footer />
-      </div>
-      <Toaster />
-    </Router>
+          <Footer />
+        </div>
+        <Toaster />
+      </Router>
+    </ThemeProvider>
   );
 }
 
