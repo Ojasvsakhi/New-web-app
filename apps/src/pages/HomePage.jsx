@@ -2,13 +2,13 @@ import React, { useRef, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, FileText, Shield, Calculator, TrendingUp, CheckCircle2, Award } from 'lucide-react';
+import { ArrowRight, FileText, Shield, Calculator, TrendingUp, CheckCircle2, Award, Phone, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Header from '@/components/Header.jsx';
 import Footer from '@/components/Footer.jsx';
-import QuickContactSheet from '../components/QuickContactSheet';
 import ServiceCard from '@/components/ServiceCard.jsx';
 import TestimonialCard from '@/components/TestimonialCard.jsx';
+import { toast } from 'sonner';
 
 function HomePage() {
   const heroRef = useRef(null);
@@ -30,22 +30,26 @@ function HomePage() {
     icon: Calculator,
     title: 'Tax planning & compliance',
     hash: 'tax-planning',
-    description: 'Strategic tax planning to minimize liabilities while ensuring full compliance with current regulations.'
+    description: 'Strategic tax planning to minimize liabilities while ensuring full compliance with current regulations.',
+    theme: { bgLight: 'bg-blue-500/10', hoverBg: 'hover:bg-blue-500/10', ring: 'ring-blue-500/30', text: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-500', gradientFrom: 'from-blue-500/30' }
   }, {
     icon: Shield,
     title: 'Audit services',
     hash: 'audit-services',
-    description: 'Comprehensive audit and assurance services to maintain financial integrity and regulatory compliance.'
+    description: 'Comprehensive audit and assurance services to maintain financial integrity and regulatory compliance.',
+    theme: { bgLight: 'bg-indigo-500/10', hoverBg: 'hover:bg-indigo-500/10', ring: 'ring-indigo-500/30', text: 'text-indigo-600 dark:text-indigo-400', bg: 'bg-indigo-500', gradientFrom: 'from-indigo-500/30' }
   }, {
     icon: FileText,
     title: 'GST compliance',
     hash: 'gst-indirect',
-    description: 'Expert guidance on GST registration, filing, and compliance to keep your business on track.'
+    description: 'Expert guidance on GST registration, filing, and compliance to keep your business on track.',
+    theme: { bgLight: 'bg-emerald-500/10', hoverBg: 'hover:bg-emerald-500/10', ring: 'ring-emerald-500/30', text: 'text-emerald-600 dark:text-emerald-400', bg: 'bg-emerald-500', gradientFrom: 'from-emerald-500/30' }
   }, {
     icon: TrendingUp,
     title: 'Financial consulting',
     hash: 'financial-consulting',
-    description: 'Strategic financial advice to help your business grow and achieve long-term financial goals.'
+    description: 'Strategic financial advice to help your business grow and achieve long-term financial goals.',
+    theme: { bgLight: 'bg-teal-500/10', hoverBg: 'hover:bg-teal-500/10', ring: 'ring-teal-500/30', text: 'text-teal-600 dark:text-teal-400', bg: 'bg-teal-500', gradientFrom: 'from-teal-500/30' }
   }];
 
   const testimonials = [{
@@ -203,17 +207,19 @@ function HomePage() {
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                    <QuickContactSheet>
-                      <Button 
-                        ref={btn1Ref}
-                        size="lg" 
-                        className="text-base transition-all duration-200 active:scale-[0.98] group bg-[#1b4498] hover:bg-[#1b4498]/90 text-white hover:text-white border-0"
-                        style={{ transition: 'background-image 0.1s ease' }}
-                      >
+                    <Button 
+                      asChild
+                      ref={btn1Ref}
+                      size="lg" 
+                      className="text-base transition-all duration-200 active:scale-[0.98] group bg-[#1b4498] hover:bg-[#1b4498]/90 text-white hover:text-white border-0"
+                      style={{ transition: 'background-image 0.1s ease' }}
+                      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    >
+                      <Link to="/contact">
                         Schedule consultation
                         <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                      </Button>
-                    </QuickContactSheet>
+                      </Link>
+                    </Button>
                     
                     <Button
                       asChild
@@ -242,7 +248,7 @@ function HomePage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {services.map((service, index) => (
-                  <Link key={service.hash || index} to={`/services#${service.hash}`} className="group">
+                  <Link key={service.hash || index} to={`/services#${service.hash}`} className="block h-full group">
                     <ServiceCard {...service} index={index} className="cursor-pointer" />
                   </Link>
                 ))}
@@ -318,16 +324,32 @@ function HomePage() {
                   Schedule a consultation today and discover how personalized CA services can benefit your business.
                 </p>
                 
-                <QuickContactSheet>
-                  <Button 
-                    size="lg" 
-                    variant="secondary" 
-                    className="rounded-full px-8 text-base font-medium transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-[0_0_20px_-5px_rgba(255,255,255,0.2)]"
-                  >
-                    Contact us today
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </QuickContactSheet>
+                <Button 
+                  size="lg" 
+                  variant="secondary" 
+                  className="hidden md:inline-flex rounded-full px-8 text-base font-medium transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-[0_0_20px_-5px_rgba(255,255,255,0.2)]"
+                  onClick={() => {
+                    navigator.clipboard.writeText('rupesh.sakhi@icai.org');
+                    toast.success('Email address copied to clipboard!', {
+                      description: 'You can now paste it into your preferred email app.'
+                    });
+                  }}
+                >
+                  Email us directly
+                  <Mail className="ml-2 h-5 w-5" />
+                </Button>
+
+                <Button 
+                  asChild
+                  size="lg" 
+                  variant="secondary" 
+                  className="inline-flex md:hidden rounded-full px-8 text-base font-medium transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-[0_0_20px_-5px_rgba(255,255,255,0.2)]"
+                >
+                  <a href="tel:+919406649542">
+                    Call us directly
+                    <Phone className="ml-2 h-5 w-5" />
+                  </a>
+                </Button>
               </div>
               
             </div>

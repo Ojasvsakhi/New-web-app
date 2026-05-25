@@ -64,7 +64,7 @@ function ContactPage() {
   return (
     <>
       <Helmet>
-        <title>Contact & Support - Rupesh Sakhi & Co</title>
+        <title>Contact & Support</title>
         <meta name="description" content="Get in touch with us for professional chartered accountant services. Find our office hours, location, and answers to frequently asked questions." />
       </Helmet>
 
@@ -76,13 +76,9 @@ function ContactPage() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            {/* <span className="inline-flex items-center space-x-2 bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
-              <MessageSquare className="w-4 h-4" />
-              <span>We're here to help</span>
-            </span> */}
             <TypewriterTitle prefix="Let's start a " highlight="Conversation" />
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              Whether you have a quick question, need technical support, or want to discuss a comprehensive financial strategy, our doors are open.
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mt-6">
+              Whether you want to schedule a comprehensive consultation or have a quick question, our doors are open.
             </p>
           </motion.div>
         </div>
@@ -186,9 +182,10 @@ function ContactPage() {
             >
               <div className="bg-card rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-8 sm:p-10 border border-border relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 to-blue-400" />
-                <h2 className="text-2xl font-semibold mb-2">Send an Inquiry</h2>
+                
+                <h2 className="text-2xl font-semibold mb-2">Schedule or Inquire</h2>
                 <p className="text-muted-foreground mb-8 text-sm">
-                  Not ready to schedule a full consultation? Send us a quick message and our team will get back to you shortly.
+                  Fill out the form below to schedule a consultation or send us a message. Our team will get back to you promptly.
                 </p>
                 <ContactForm />
               </div>

@@ -4,7 +4,6 @@ import { useTheme } from 'next-themes';
 import { Menu, X, Calendar, ChevronDown, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
-import QuickContactSheet from '@/components/QuickContactSheet.jsx';
 
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -208,12 +207,6 @@ function Header() {
               })}
             </nav>
 
-            <QuickContactSheet>
-              <Button className="rounded-full px-6 transition-all duration-200 hover:shadow-md">
-                Let's talk
-              </Button>
-            </QuickContactSheet>
-
             <Button
               variant="ghost"
               size="icon"
@@ -305,12 +298,17 @@ function Header() {
                 ))}
 
                 <div className="px-4 pt-4">
-                  <QuickContactSheet>
-                    <Button className="w-full transition-all duration-200 active:scale-[0.98]">
-                      <Calendar className="mr-2 h-4 w-4" />
-                      Schedule consultation
-                    </Button>
-                  </QuickContactSheet>
+                  <Button 
+                    className="w-full transition-all duration-200 active:scale-[0.98]"
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      navigate('/contact');
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                  >
+                    <Calendar className="mr-2 h-4 w-4" />
+                    Schedule consultation
+                  </Button>
                 </div>
               </div>
             </motion.nav>

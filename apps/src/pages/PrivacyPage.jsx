@@ -1,9 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import TypewriterTitle from '../components/TypewriterTitle';
+import { Helmet } from 'react-helmet';
 
 export default function PrivacyPage() {
   return (
+    <>
+    <Helmet>
+      <title>Privacy Policies</title>
+    </Helmet>
     <div className="min-h-screen flex flex-col">
       <main className="flex-1">
         <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
@@ -21,8 +26,7 @@ export default function PrivacyPage() {
             </motion.div>
           </div>
         </section>
-
-        {/* Content Section */}
+        
         <section className="py-12 bg-background">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-foreground/80 leading-relaxed">
             <section>
@@ -67,5 +71,6 @@ export default function PrivacyPage() {
         </section>
       </main>
     </div>
+  </>
   );
 }

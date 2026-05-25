@@ -219,7 +219,7 @@ function ServicesPage() {
   return (
     <>
       <Helmet>
-        <title>Professional CA services - Rupesh Sakhi & Co</title>
+        <title>Professional CA services</title>
         <meta name="description" content="Comprehensive chartered accountant services including tax planning, audit, GST compliance, financial consulting, bookkeeping, and business advisory. Expert solutions for your business." />
       </Helmet>
 
@@ -235,7 +235,7 @@ function ServicesPage() {
                 className="text-center max-w-3xl mx-auto"
               >
                 <TypewriterTitle prefix="Core " highlight="Services" />
-                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mt-4">
                   Comprehensive chartered accountant services designed to support your business growth and ensure financial compliance
                 </p>
               </motion.div>
@@ -251,8 +251,8 @@ function ServicesPage() {
                     id={service.id}
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true, margin: "0px 0px -50px 0px" }}
+                    transition={{ duration: 0.4, delay: 0.2 }}
                     className={`group relative flex flex-col md:flex-row items-center gap-10 lg:gap-12 p-8 lg:p-10 rounded-[2.5rem] border border-border shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:border-slate-300 dark:hover:border-slate-700 ${
                       index % 2 === 1 ? 'md:flex-row-reverse' : ''
                     } ${

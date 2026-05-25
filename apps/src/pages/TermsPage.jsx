@@ -1,9 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import TypewriterTitle from '../components/TypewriterTitle';
+import { Helmet } from 'react-helmet';
 
 export default function TermsPage() {
   return (
+    <>
+    <Helmet>
+      <title>Terms of Services</title>
+    </Helmet>
     <div className="min-h-screen flex flex-col">
       <main className="flex-1">
         
@@ -74,5 +79,6 @@ export default function TermsPage() {
         
       </main>
     </div>
+  </>
   );
 }

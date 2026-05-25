@@ -3,6 +3,7 @@ import { supabase } from '@/lib/supabaseClient';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, BookOpen, Search, ArrowLeft, Clock, ChevronRight, TrendingUp, X, ChevronDown, Check } from 'lucide-react';
 import TypewriterTitle from '../components/TypewriterTitle';
+import { Helmet } from 'react-helmet';
 
 function useDebounce(value, delay) {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -109,6 +110,10 @@ export default function BlogPage() {
   };
 
   return (
+    <>
+    <Helmet>
+      <title>Financal Briefings</title>
+    </Helmet>
     <div className="min-h-screen bg-background relative overflow-hidden">
       
       <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
@@ -393,5 +398,6 @@ export default function BlogPage() {
         </div>
       </section>
     </div>
+  </>
   );
 }

@@ -45,7 +45,7 @@ function AboutPage() {
   return (
     <>
       <Helmet>
-        <title>About Rupesh Sakhi - 13 years of professional CA experience</title>
+        <title>About Us</title>
         <meta name="description" content="Learn about Rupesh Sakhi, a chartered accountant with 13 years of experience providing personalized accounting, tax, and audit services to businesses across India." />
       </Helmet>
 
