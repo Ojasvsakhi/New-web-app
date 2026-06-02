@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { ShieldCheck, LogOut, PenTool, CheckCircle2, Trash2, CalendarDays } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 export default function AdminPage() {
   const [session, setSession] = useState(null);
@@ -17,6 +18,16 @@ export default function AdminPage() {
   const [status, setStatus] = useState({ type: '', message: '' });
   
   const [existingBlogs, setExistingBlogs] = useState([]);
+  
+  const quillModules = useMemo(() => ({
+    toolbar: [
+      [{ 'header': [2, 3, false] }], 
+      ['bold', 'italic', 'underline'], 
+      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      ['link'],
+      ['clean']
+    ]
+  }), []);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => setSession(session));
@@ -26,6 +37,33 @@ export default function AdminPage() {
   useEffect(() => {
     if (session) {
       fetchBlogs();
+    }
+  }, [session]);
+
+  useEffect(() => {
+    if (session) {
+      const addTooltips = () => {
+        const tooltips = {
+          '.ql-bold': 'Bold',
+          '.ql-italic': 'Italic',
+          '.ql-underline': 'Underline',
+          '.ql-list[value="ordered"]': 'Numbered List',
+          '.ql-list[value="bullet"]': 'Bullet List',
+          '.ql-link': 'Insert Link',
+          '.ql-clean': 'Clear Formatting'
+        };
+
+        Object.entries(tooltips).forEach(([selector, text]) => {
+          const button = document.querySelector(selector);
+          if (button) button.setAttribute('title', text);
+        });
+
+        const headerDropdown = document.querySelector('.ql-header .ql-picker-label');
+        if (headerDropdown) headerDropdown.setAttribute('title', 'Text Size');
+      };
+
+      const timeout = setTimeout(addTooltips, 200);
+      return () => clearTimeout(timeout);
     }
   }, [session]);
 
@@ -48,6 +86,12 @@ export default function AdminPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!content || content === '<p><br></p>') {
+      setStatus({ type: 'error', message: 'Content cannot be empty.' });
+      setTimeout(() => setStatus({ type: '', message: '' }), 4000);
+      return;
+    }
+
     setStatus({ type: 'loading', message: 'Publishing securely...' });
     
     const { error } = await supabase
@@ -183,14 +227,16 @@ export default function AdminPage() {
                 </div>
                 <div>
                   <label className="text-sm font-semibold text-slate-900 mb-1.5 block">Main Content</label>
-                  <Textarea 
-                    value={content} 
-                    onChange={(e) => setContent(e.target.value)} 
-                    required 
-                    rows={12}
-                    className="resize-y text-base leading-relaxed p-4 bg-slate-50/50"
-                    placeholder="Start typing your insight here..." 
-                  />
+                  <div className="bg-white rounded-md">
+                    <ReactQuill 
+                      theme="snow" 
+                      value={content} 
+                      onChange={setContent}
+                      modules={quillModules}
+                      className="h-64 mb-12"
+                      placeholder="Start typing your insight here..." 
+                    />
+                  </div>
                 </div>
               </div>
 

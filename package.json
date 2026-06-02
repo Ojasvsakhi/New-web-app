@@ -9,6 +9,7 @@
 		"lint": "concurrently --raw \"npm run lint --prefix apps\""
 	},
 	"devDependencies": {
+		"@tailwindcss/typography": "^0.5.19",
 		"concurrently": "^9.1.2"
 	},
 	"workspaces": [
@@ -16,6 +17,7 @@
 	],
 	"dependencies": {
 		"framer-motion": "^12.38.0",
-		"next-themes": "^0.4.6"
+		"next-themes": "^0.4.6",
+		"react-quill": "^2.0.0"
 	}
 }

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, BookOpen, Search, ArrowLeft, Clock, ChevronRight, TrendingUp, X, ChevronDown, Check } from 'lucide-react';
+import { Calendar, BookOpen, Search, ArrowLeft, Clock, ChevronRight, X, ChevronDown, Check, Share2 } from 'lucide-react';
 import TypewriterTitle from '../components/TypewriterTitle';
 import { Helmet } from 'react-helmet';
-
+import { toast } from 'sonner';
+import 'react-quill/dist/quill.snow.css';
 function useDebounce(value, delay) {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
@@ -13,6 +14,13 @@ function useDebounce(value, delay) {
   }, [value, delay]);
   return debouncedValue;
 }
+
+const getReadingTime = (text) => {
+  if (!text) return "1 min read";
+  const words = text.trim().split(/\s+/).length;
+  const time = Math.ceil(words / 200);
+  return `${time} min read`;
+};
 
 export default function BlogPage() {
   const [blogs, setBlogs] = useState([]);
@@ -41,6 +49,22 @@ export default function BlogPage() {
 
   useEffect(() => {
     const fetchBlogs = async () => {
+      const cachedBlogs = sessionStorage.getItem('rs_blogs_cache');
+      
+      if (cachedBlogs) {
+        try {
+          const parsedBlogs = JSON.parse(cachedBlogs);
+          if (parsedBlogs.length > 0) {
+            setBlogs(parsedBlogs);
+            setSelectedBlog(parsedBlogs[0]);
+            setLoading(false);
+            return;
+          }
+        } catch (e) {
+          console.error("Failed to parse cached blogs", e);
+        }
+      }
+
       const today = new Date().toISOString().split('T')[0];
       const { data, error } = await supabase
         .from('blogs')
@@ -51,6 +75,7 @@ export default function BlogPage() {
       if (!error && data && data.length > 0) {
         setBlogs(data);
         setSelectedBlog(data[0]);
+        sessionStorage.setItem('rs_blogs_cache', JSON.stringify(data));
       }
       setLoading(false);
     };
@@ -109,10 +134,31 @@ export default function BlogPage() {
     setSelectedArchive('all');
   };
 
+  const handleShare = async () => {
+    if (!selectedBlog) return;
+
+    const shareData = {
+      title: selectedBlog.title,
+      text: `Financial Briefing: ${selectedBlog.title} - Rupesh Sakhi & Co`,
+      url: window.location.href,
+    };
+
+    if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+      }
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      toast.success('Link copied to clipboard!');
+    }
+  };
+
   return (
     <>
     <Helmet>
-      <title>Financal Briefings</title>
+      <title>Financial Briefings</title>
+      <meta name="description" content="Daily financial updates, tax strategies, and regulatory shifts curated specifically for growing businesses and professionals." />
     </Helmet>
     <div className="min-h-screen bg-background relative overflow-hidden">
       
@@ -124,12 +170,8 @@ export default function BlogPage() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            {/* <span className="inline-flex items-center space-x-2 bg-blue-50 text-blue-700 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
-              <TrendingUp className="w-4 h-4" />
-              <span>Market Insights</span>
-            </span> */}
             <TypewriterTitle prefix="Financial " highlight="Briefing" />
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mt-4">
               Daily updates, tax strategies, and regulatory shifts curated specifically for growing businesses and professionals.
             </p>
           </motion.div>
@@ -153,6 +195,7 @@ export default function BlogPage() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full pl-9 pr-4 py-2.5 bg-muted/50 hover:bg-muted border border-transparent focus:bg-background focus:border-blue-500 rounded-xl focus:ring-2 focus:ring-blue-500/20 transition-all outline-none text-foreground placeholder:text-muted-foreground text-sm font-medium"
+                    aria-label="Search financial briefings"
                   />
                 </div>
 
@@ -161,6 +204,8 @@ export default function BlogPage() {
                   <div className="relative flex-1" ref={dropdownRef}>
                     <button
                       onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                      aria-label="Filter by month"
+                      aria-expanded={isDropdownOpen}
                       className={`w-full flex items-center justify-between pl-9 pr-4 py-2.5 bg-muted/50 hover:bg-muted border rounded-xl transition-all outline-none text-sm font-medium ${
                         isDropdownOpen 
                           ? 'bg-background border-blue-500 ring-2 ring-blue-500/20 text-foreground' 
@@ -232,6 +277,7 @@ export default function BlogPage() {
                   {(searchQuery || selectedArchive !== 'all') && (
                     <button 
                       onClick={clearFilters}
+                      aria-label="Clear filters"
                       title="Clear filters"
                       className="p-2.5 bg-red-50 text-red-600 hover:bg-red-100 rounded-xl transition-colors border border-red-100 flex-shrink-0"
                     >
@@ -285,9 +331,14 @@ export default function BlogPage() {
                               : 'bg-card border-border hover:border-blue-300 hover:shadow-sm'
                           }`}
                         >
-                          <span className={`text-xs font-semibold mb-2 ${isSelected ? 'text-blue-200' : 'text-muted-foreground'}`}>
-                            {new Date(blog.published_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                          </span>
+                          <div className="flex items-center justify-between mb-2">
+                            <span className={`text-xs font-semibold ${isSelected ? 'text-blue-200' : 'text-muted-foreground'}`}>
+                              {new Date(blog.published_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                            </span>
+                            <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${isSelected ? 'bg-blue-500/50 text-blue-100' : 'bg-muted text-muted-foreground group-hover:bg-blue-50 group-hover:text-blue-600'}`}>
+                              {getReadingTime(blog.content)}
+                            </span>
+                          </div>
                           <h4 className={`text-base font-bold leading-snug mb-3 lining-nums ${isSelected ? 'text-white' : 'text-foreground group-hover:text-blue-700'}`}>
                             {blog.title}
                           </h4>
@@ -355,6 +406,7 @@ export default function BlogPage() {
                     <div className="lg:hidden p-4 border-b border-border bg-muted/30">
                       <button 
                         onClick={() => setIsMobileReaderOpen(false)}
+                        aria-label="Back to feed"
                         className="flex items-center text-sm font-semibold text-muted-foreground hover:text-blue-600 transition-colors"
                       >
                         <ArrowLeft className="w-4 h-4 mr-2" />
@@ -363,25 +415,38 @@ export default function BlogPage() {
                     </div>
 
                     <div className="p-8 md:p-12 lg:p-16">
-                      <div className="flex items-center space-x-2 text-blue-600 mb-8">
-                        <Calendar className="h-5 w-5" />
-                        <span className="text-sm font-bold tracking-wider uppercase">
-                          {new Date(selectedBlog.published_date).toLocaleDateString('en-US', {
-                            weekday: 'long',
-                            month: 'long',
-                            day: 'numeric',
-                            year: 'numeric'
-                          })}
-                        </span>
+                      <div className="flex items-center justify-between mb-8">
+                        <div className="flex items-center space-x-2 text-blue-600">
+                          <Calendar className="h-5 w-5" />
+                          <span className="text-sm font-bold tracking-wider uppercase">
+                            {new Date(selectedBlog.published_date).toLocaleDateString('en-US', {
+                              month: 'long',
+                              day: 'numeric',
+                              year: 'numeric'
+                            })}
+                            <span className="mx-2 text-muted-foreground/40">•</span>
+                            <span className="text-muted-foreground lowercase">{getReadingTime(selectedBlog.content)}</span>
+                          </span>
+                        </div>
+                        
+                        <button
+                          onClick={handleShare}
+                          aria-label="Share this briefing"
+                          title="Share Briefing"
+                          className="flex items-center justify-center p-2.5 rounded-full bg-muted/50 text-muted-foreground hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        >
+                          <Share2 className="w-5 h-5" />
+                        </button>
                       </div>
                       
-                      <h2 className="text-4xl md:text-5l lg:text-6l font-bold mb-5 text-foreground leading-[1.1] lining-nums">
+                      <h2 className="text-4xl font-bold mb-6 text-foreground leading-[1.1] lining-nums">
                         {selectedBlog.title}
                       </h2>
                       
-                      <div className="prose prose-lg max-w-none text-muted-foreground leading-relaxed whitespace-pre-wrap">
-                        {selectedBlog.content}
-                      </div>
+                      <div 
+                        className="prose prose-lg prose-slate max-w-none text-muted-foreground leading-relaxed prose-headings:text-foreground prose-strong:text-inherit prose-a:text-blue-600 hover:prose-a:text-blue-700 prose-a:font-semibold prose-a:no-underline hover:prose-a:underline ql-editor !p-0 [&_ul]:list-none [&_ol]:list-none"
+                        dangerouslySetInnerHTML={{ __html: selectedBlog.content }} 
+                      />
                     </div>
                   </motion.div>
                 ) : (
